@@ -16,7 +16,7 @@ symbol = "󰏗 "
 
 [cmd_duration]
 min_time = 4
-show_milliseconda = false
+show_milliseconds = false
 disabled = false
 style = "bold italic red"
 
