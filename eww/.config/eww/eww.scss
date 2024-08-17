@@ -1,0 +1,27 @@
+* {
+  all: unset;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.bar {
+  background-color: #1e1e2e;
+  color: #f2cdcd;
+  padding: 0px 10px;
+}
+
+.workspace-entry.current.empty,
+.occupied {
+  opacity: 1;
+}
+
+.workspace-entry.empty {
+  opacity: 0;
+}
+
+.shutdown-button:hover {
+  color: #ff4444;
+  transition: all 0.1s ease 0.2s;
+}

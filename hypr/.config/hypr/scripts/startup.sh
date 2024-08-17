@@ -8,4 +8,5 @@
 
 # eww
 eww daemon &
+eww open bar
 

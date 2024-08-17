@@ -1,0 +1,35 @@
+(include "./yuck/workspaces.yuck")
+
+(defpoll time
+  :interval "1s"
+  :initial-value ""
+  `date '+%a, %b %d %I:%M %p'`
+)
+
+(defwidget bar[]
+  (box
+    :space-evenly true
+    :valign "center"
+    :orientation "horizontal"
+    :class "bar"
+    (box
+      :orientation "horizontal"
+      :halign "start"
+      (workspaces)
+    )
+    (box
+      :space-evenly true
+      :halign "center"
+      :class "time-container"
+      (label :text "${time}" :class "bold")
+    )
+    (box
+      :halign "end"
+      (button
+        :class "shutdown-button"
+        :onclick "poweroff"
+        "⏻"
+      )
+    )
+  )
+)
