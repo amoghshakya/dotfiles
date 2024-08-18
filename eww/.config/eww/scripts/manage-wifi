@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+case $1 in
+toggle)
+    state=$(nmcli radio wifi)
+    if [ "$state" == "enabled" ]; then
+        nmcli radio wifi off
+        echo "Wi-Fi Off"
+    else
+        nmcli radio wifi on
+        echo "Wi-Fi On"
+    fi
+    ;;
+list)
+    nmcli -t -f SSID,ACTIVE,SECURITY dev wifi list --rescan yes | awk -F: '
+    {
+      if ($2 == "yes") {
+        print "Connected: " $1
+      } else {
+        print "Available: " $1
+      }
+    }'
+    ;;
+connect)
+    nmcli dev wifi connect "$2"
+    ;;
+esac
