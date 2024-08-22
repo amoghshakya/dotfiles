@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+get_volume_icon() {
+    local volume=$1
+    if [ "$volume" -eq 0 ]; then
+        echo "󰸈"
+    elif [ "$volume" -le 20 ]; then
+        echo "󰕿"
+    elif [ "$volume" -le 70 ]; then
+        echo "󰖀"
+    else
+        echo "󰕾"
+    fi
+}
+
+output_status() {
+    VOLUME=$(wpctl get-volume @DEFAULT_SINK@ | awk '{print int($2 * 100)}')
+    MUTED=$(wpctl get-volume @DEFAULT_SINK@ | grep -oE '\[(MUTED|UNMUTED)\]' | tr -d '[]')
+    MIC_VOLUME=$(wpctl get-volume @DEFAULT_SOURCE@ | awk '{print int($2 * 100)}')
+    MIC_MUTED=$(wpctl get-volume @DEFAULT_SOURCE@ | grep -oE '\[(MUTED|UNMUTED)\]' | tr -d '[]')
+
+    if [ "$MUTED" == "MUTED" ]; then
+        VOLUME_ICON="󰝟"
+    else
+        VOLUME_ICON=$(get_volume_icon "$VOLUME")
+    fi
+
+    if [ "$MIC_MUTED" == "MUTED" ]; then
+        MIC_ICON="󰍭"
+    else
+        MIC_ICON="󰍬"
+    fi
+
+    echo -n "{"
+    echo -n "\"volume\": {"
+    echo -n "\"level\": \"$VOLUME\","
+    echo -n "\"muted\": \"$MUTED\","
+    echo -n "\"icon\": \"$VOLUME_ICON\" },"
+    echo -n "\"microphone\": {"
+    echo -n "\"level\": \"$MIC_VOLUME\","
+    echo -n "\"muted\": \"$MIC_MUTED\","
+    echo -n "\"icon\": \"$MIC_ICON\" }"
+    echo -n "}"
+}
+
+listen() {
+    previous_output=""
+    while true; do
+        current_output=$(output_status)
+        if [ "$current_output" != "$previous_output" ]; then
+            previous_output="$current_output"
+            echo "$current_output"
+        fi
+        sleep 0.5
+    done
+}
+
+case $1 in
+"output")
+    output_status
+    ;;
+
+"listen")
+    listen
+    ;;
+
+*)
+    echo "Usage: $0 [output|listen]"
+    ;;
+esac

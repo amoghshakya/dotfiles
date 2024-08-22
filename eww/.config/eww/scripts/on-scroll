@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+SCROLL_DELTA=$1
+
+if [ "$SCROLL_DELTA" == "up" ]; then
+    wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
+elif [ "$SCROLL_DELTA" == "down" ]; then
+    wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-
+fi

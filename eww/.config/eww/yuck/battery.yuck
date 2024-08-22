@@ -1,0 +1,17 @@
+(defpoll battery-status
+  :interval "5s"
+  :initial ""
+  "bash ~/.config/eww/scripts/get_battery | jq '.'"
+)
+
+(defwidget battery[]
+  (box
+    :orientation "horizontal"
+    :class "battery-widget"
+    (label
+      :text "${battery-status.icon}"
+      :tooltip "${battery-status.status}${battery-status?.percentage}"
+      :class "battery-text"
+    )
+  )
+)

@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+function get_brightness_icon() {
+    local brightness=$1
+    if [ "$brightness" -le 20 ]; then
+        echo "󰃞"
+    elif [ "$brightness" -le 50 ]; then
+        echo "󰃝"
+    elif [ "$brightness" -le 85 ]; then
+        echo "󰃟"
+    else
+        echo "󰃠"
+    fi
+}
+
+function output_status() {
+    brightness=$(brightnessctl -m | grep -o '[0-9]\+%' | head -c-2)
+    icon=$(get_brightness_icon $brightness)
+    echo -n "{"
+    echo -n "\"level\": \"$brightness\", "
+    echo -n "\"icon\": \"$icon\""
+    echo -n "}"
+}
+
+function listen() {
+    previous_output=""
+    while true; do
+        current_output=$(output_status)
+        if [ "$current_output" != "$previous_output" ]; then
+            previous_output="$current_output"
+            echo "$current_output"
+        fi
+        sleep 0.5
+    done
+}
+
+case $1 in
+"output")
+    output_status
+    ;;
+
+"listen")
+    listen
+    ;;
+
+*)
+    echo "Usage: $0 [output|listen]"
+    ;;
+esac

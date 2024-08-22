@@ -1,15 +1,20 @@
 * {
   all: unset;
+  font-family: "FiraCode Nerd Font";
 }
 
 .bold {
   font-weight: bold;
 }
 
+.time-container {
+  font-size: 12px;
+}
+
 .bar {
   background-color: #1e1e2e;
   color: #f2cdcd;
-  padding: 0px 10px;
+  padding: 2px 0px;
 }
 
 .workspace-entry.current.empty,
@@ -24,4 +29,75 @@
 .shutdown-button:hover {
   color: #ff4444;
   transition: all 0.1s ease 0.2s;
+}
+
+.network-status {
+  padding: 0 5px;
+}
+
+.network-toggle:hover {
+  background-color: #2d2d46;
+}
+
+.dropdown-window {
+  background-color: #1e1e2e;
+  border: 1px solid #2d2d46;
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+
+.container {
+  padding: 3px 6px;
+  font-size: 0.8rem;
+}
+
+.network:hover {
+  background-color: #2d2d46;
+  border-radius: 5px;
+  transition: all 0.1s ease 0.1s;
+}
+
+.workspaces {
+  padding: 0px 10px;
+}
+
+.systems-container {
+  padding: 0px 5px;
+}
+
+.systems-dropdown-toggle:hover {
+  background-color: #2d2d46;
+  border-radius: 15px;
+  transition: all 0.1s ease 0.1s;
+}
+
+.volume {
+  font-size: 18px;
+}
+
+.slider trough {
+  background-color: #161620;
+  padding: 1px;
+}
+
+.slider slider {
+  background-color: #af8282;
+  margin: -6px;
+  border-radius: 50%;
+}
+
+.slider highlight {
+  padding: 1px;
+  background-color: #2d2d46;
+}
+
+.bgt {
+  margin-left: 2px;
+}
+
+tooltip {
+  background-color: #1e1e2e;
+  color: #f2cdcd;
+  border-radius: 5px;
+  font-size: 12px;
 }

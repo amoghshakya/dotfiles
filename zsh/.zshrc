@@ -32,7 +32,7 @@ zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::nvm
-# zinit snippet OMZP::archlinux \
+zinit snippet OMZP::archlinux
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -61,6 +61,12 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias ls='ls --color'
+alias la='ls -la'
+alias ll='ls -l'
+alias hyprland='Hyprland'
+
+# Variables
+export EDITOR="nvim"
 
 # Shell integrations
 eval "$(fzf --zsh)"

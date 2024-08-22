@@ -1,0 +1,111 @@
+(defpoll current-network
+  :interval "10s"
+  :initial " "
+  "bash ~/.config/eww/scripts/get-network-info current | jq '.'"
+)
+
+(defpoll available-networks
+  :interval "10s"
+  :initial "Scanning..."
+  "bash ~/.config/eww/scripts/get-network-info available | jq '.'"
+)
+
+(defvar network-panel-visible "false")
+
+(defwidget current_network []
+  ; (eventbox
+    ;   :onclick "
+    ;   if [[ ${network-panel-visible} == 'true' ]]; then
+    ;   eww update network-panel-visible=false;
+    ;   eww close network-panel;
+    ;   else
+    ;   eww update network-panel-visible=true;
+    ;   eww open network-panel;
+    ;   fi
+    ;   "
+    ;   :class "network-toggle"
+    (box
+      :orientation "horizontal"
+      :spacing 5
+      :class "network-status"
+      (label
+        :text "${
+        current-network.type == 'Ethernet' ? ' 󰈀 '
+        : current-network.type == 'Wi-Fi' ?
+        (current-network.signal >= 80 ? ' 󰤨 '
+          : current-network.signal >= 60 ? ' 󰤥 '
+          : current-network.signal >= 40 ? ' 󰤢 '
+          : current-network.signal >= 20 ? ' 󰤟 '
+          : current-network.signal >= 0 ? ' 󰤯 '
+        : ' 󰤮 ')
+        : '  '
+        }"
+        :tooltip "${
+        current-network.type == "Unknown" ?
+        "Disconnected"
+        : current-network.ssid
+        } ${current-network.ip}"
+      )
+    )
+  )
+; )
+
+(defwidget network-widget []
+  (current_network)
+)
+
+(defwindow network-panel
+  :monitor 0
+  :geometry (geometry
+    :x "1%"
+    :y "1%"
+    :anchor "top right"
+    :width "20%"
+  )
+  :floating true
+  :exclusive true
+  :visible "${network-panel-visible}"
+  (box
+    (eventbox
+      :onhoverlost "eww close network-panel"
+      (box
+        :orientation "v"
+        :spacing 5
+        (label
+          :text "WiFi"
+        )
+        (for network in available-networks
+          (eventbox
+            :onclick "eww close network-panel"
+            :class "network"
+            (box
+              :class "container"
+              (label
+                :halign "start"
+                :text "${
+                network.security == ''
+                ? (network.signal >= 80 ? '󰤨 '
+                  : network.signal >= 60 ? '󰤥 '
+                  : network.signal >= 40 ? '󰤢 '
+                  : network.signal >= 20 ? '󰤟 '
+                  : network.signal >= 0 ? '󰤯 '
+                : '󰤮')
+                : (network.signal >= 80 ? '󰤪 '
+                  : network.signal >= 60 ? '󰤧 '
+                  : network.signal >= 40 ? '󰤤 '
+                  : network.signal >= 20 ? '󰤡 '
+                  : network.signal >= 0 ? '󰤬 '
+                : '󰤮')
+                } ${network.ssid}"
+              )
+              (label
+                :halign "end"
+                :class "connection-status-label"
+                :text "${network.active == 'yes' ? 'Connected' : '' }"
+              )
+            )
+          )
+        )
+      )
+    )
+  ))

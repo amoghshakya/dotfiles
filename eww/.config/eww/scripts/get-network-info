@@ -1,1 +1,60 @@
 #!/usr/bin/env bash
+
+active_interface=$(nmcli -t -f DEVICE,STATE,TYPE dev status | grep ':connected' | grep -E 'wifi|ethernet' | cut -d':' -f1 | head -n 1)
+connected_network=$(nmcli -t -f active,ssid,signal dev wifi | grep '^yes')
+connected_ssid=$(echo $connected_network | cut -d':' -f2)
+connection_signal=$(echo $connected_network | cut -d':' -f3)
+connection_type=$(nmcli -t -f TYPE connection show --active | head -n 1)
+
+if [ "$connection_type" == "802-3-ethernet" ]; then
+    connection_type="Ethernet"
+elif [ "$connection_type" == "802-11-wireless" ]; then
+    connection_type="Wi-Fi"
+else
+    connection_type="Unknown"
+fi
+
+ip_address=$(nmcli -t -f IP4.ADDRESS dev show $active_interface | grep IP4.ADDRESS | cut -d':' -f2)
+available_networks=$(nmcli -t -f ssid,signal,security,active dev wifi list | grep -v '^:')
+
+if [ -n "$connected_ssid" ]; then
+    active_entry=$(echo "$available_networks" | grep ":yes")
+    available_networks=$(echo "$available_networks" | grep -v "$connected_ssid")
+
+    # Reinsert the active entry at the top of the list
+    available_networks="$active_entry"$'\n'"$available_networks"
+fi
+
+function getCurrentNetwork() {
+    echo -n '{'
+    echo -n "\"ssid\": \"$connected_ssid\","
+    echo -n "\"type\": \"$connection_type\","
+    echo -n "\"signal\": \"$connection_signal\","
+    echo -n "\"ip\": \"$ip_address\"}"
+}
+
+function getAvailableNetworks() {
+    echo -n "["
+    first=true
+    while IFS= read -r line; do
+        ssid=$(echo "$line" | cut -d':' -f1)
+        signal=$(echo "$line" | cut -d':' -f2)
+        security=$(echo "$line" | cut -d':' -f3)
+        active=$(echo "$line" | cut -d':' -f4)
+        if [ "$first" = true ]; then
+            first=false
+        else
+            echo -n ","
+        fi
+        echo -n "{\"ssid\": \"$ssid\", \"signal\": \"$signal\", \"active\": \"$active\", \"security\": \"$security\"}"
+    done <<<"$available_networks"
+    echo "]"
+}
+
+if [ {$1,,} == "current" ]; then
+    getCurrentNetwork
+elif [ {$1,,} == "available" ]; then
+    getAvailableNetworks
+else
+    echo "Invalid argument"
+fi

@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+BATTERY_PATH="/sys/class/power_supply/BAT0"
+AC_PATH="/sys/class/power_supply/AC"
+
+get_battery_icon() {
+    local percentage=$1
+
+    if [ {$2,,} == "Charging" ]; then
+        echo "󰂄"
+    elif [ "$percentage" -ge 95 ]; then
+        echo "󰁹"
+    elif [ "$percentage" -ge 90 ]; then
+        echo "󰂂"
+    elif [ "$percentage" -ge 80 ]; then
+        echo "󰂁"
+    elif [ "$percentage" -ge 70 ]; then
+        echo "󰂀"
+    elif [ "$percentage" -ge 60 ]; then
+        echo "󰁿"
+    elif [ "$percentage" -ge 50 ]; then
+        echo "󰁾"
+    elif [ "$percentage" -ge 40 ]; then
+        echo "󰁽"
+    elif [ "$percentage" -ge 30 ]; then
+        echo "󰁼"
+    elif [ "$percentage" -ge 20 ]; then
+        echo "󰁻"
+    elif [ "$percentage" -ge 10 ]; then
+        echo "󰁺"
+    else
+        echo "󰂎"
+    fi
+
+}
+
+if [ -d "$BATTERY_PATH" ]; then
+    BATTERY_STATUS=$(cat "$BATTERY_PATH/status")
+    BATTERY_PERCENTAGE=$(cat "$BATTERY_PATH/capacity")
+    BATTERY_ICON=$(get_battery_icon $BATTERY_PERCENTAGE $BATTERY_STATUS)
+    echo -n "{"
+    echo -n "\"icon\": \"$BATTERY_ICON\","
+    echo -n "\"percentage\": \" $BATTERY_PERCENTAGE\","
+    echo -n "\"status\": \"$BATTERY_STATUS\""
+    echo -n "}"
+else
+    if [ -d "$AC_PATH" ]; then
+        # get the AC status (1 if plugged in, 0 if not)
+        AC_STATUS=$(cat "$AC_PATH/online")
+        if [ "$AC_STATUS" -eq 1 ]; then
+            echo -n "{"
+            echo -n "\"icon\": \"󰚥\","
+            echo -n "\"percentage\": \"$BATTERY_PERCENTAGE\","
+            echo -n "\"status\": \"AC Power (Plugged In)\""
+            echo -n "}"
+        else
+            echo -n "{"
+            echo -n "\"icon\": \"󰂄\","
+            echo -n "\"percentage\": \"$BATTERY_PERCENTAGE\","
+            echo -n "\"status\": \"Running on AC Power (Not Plugged In)\""
+            echo -n "}"
+        fi
+    else
+        # Unknown power source?
+        echo -n "{"
+        echo -n "\"icon\": \"\","
+        echo -n "\"percentage\": \"\","
+        echo -n "\"status\": \"Unknown\""
+        echo -n "}"
+    fi
+fi

@@ -1,0 +1,20 @@
+(deflisten audio-info
+  :initial "{}"
+  "bash ~/.config/eww/scripts/get-audio-info listen"
+)
+
+(defwidget audio [?onscroll ?onclick ?text]
+  (eventbox
+    :timeout "100ms"
+    :onscroll onscroll
+    :onclick onclick
+    (box
+      :orientation "h"
+      :class "volume"
+      (label
+        :text "${text ?: audio-info.volume.icon}"
+        :tooltip "${audio-info.volume.level}%"
+      )
+    )
+  )
+)

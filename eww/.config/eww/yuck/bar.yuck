@@ -1,4 +1,9 @@
 (include "./yuck/workspaces.yuck")
+(include "./yuck/battery.yuck")
+(include "./yuck/audio.yuck")
+(include "./yuck/dropdown.yuck")
+(include "./yuck/network.yuck")
+
 
 (defpoll time
   :interval "1s"
@@ -6,30 +11,60 @@
   `date '+%a, %b %d %I:%M %p'`
 )
 
-(defwidget bar[]
+(defwidget systems []
+  (box
+    :halign "end"
+    :space-evenly true
+    (network-widget)
+    (audio
+      :onscroll "bash ~/.config/eww/scripts/on-scroll {}"
+    )
+    (battery)
+    (button
+      :class "shutdown-button"
+      :onclick "poweroff"
+    "⏻")
+  )
+)
+
+(defwidget bar []
   (box
     :space-evenly true
     :valign "center"
-    :orientation "horizontal"
+    :orientation "h"
     :class "bar"
     (box
-      :orientation "horizontal"
       :halign "start"
-      (workspaces)
-    )
+      (workspaces))
+    
     (box
       :space-evenly true
       :halign "center"
       :class "time-container"
-      (label :text "${time}" :class "bold")
-    )
+      (label :text "${time}"))
+    
     (box
       :halign "end"
-      (button
-        :class "shutdown-button"
-        :onclick "poweroff"
-        "⏻"
+      :class "systems-container"
+      (eventbox
+        :onclick "
+        if [[ ${dropdown-visible} == 'true' ]]; then
+        eww update dropdown-visible=false;
+        eww close dropdown-window;
+        else
+        eww update dropdown-visible=true;
+        eww open dropdown-window;
+        fi
+        "
+        :class "systems-dropdown-toggle"
+        (box
+          :class "systems-container"
+          (systems)
+        )
       )
     )
-  )
-)
+  ))
+
+
+
+
