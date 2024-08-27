@@ -1,5 +1,5 @@
 * {
-  accent: #f5e0dc;
+  accent: #89b4fa;
 }
 
 @import "/palletes/rofi/mocha"

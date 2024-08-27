@@ -1,0 +1,25 @@
+// window
+// .control-center {
+//   border: 1px solid white;
+// }
+
+.control_center {
+  background-color: $base;
+  border-radius: 1rem;
+  padding: 0.3rem;
+  box-shadow: 0 2px 8px 1px $mantle;
+  margin: 0.2rem 17rem 0.2rem 0;
+}
+
+.systems-dropdown-toggle {
+  border-radius: 15px;
+  transition: all 0.1s ease 0.1s;
+
+  &:hover {
+    background-color: $surface0;
+  }
+
+  &.visible {
+    background-color: $surface0;
+  }
+}

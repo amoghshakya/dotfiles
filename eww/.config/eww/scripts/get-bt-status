@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+bt_status=$(bluetooth | grep -oP '\b(on|off)\b')
+
+echo $bt_status

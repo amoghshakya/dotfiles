@@ -55,6 +55,22 @@ listen() {
     done
 }
 
+get_sinks() {
+    sinks=$(pactl -f "json" list sinks | jq -r '.[] | select(.name | test("alsa_output")) | { "name": .name, "active_port": .active_port, "ports": [.ports[] | select(.availability != "not available")] }')
+    echo $sinks
+    eww update audio_sinks="$sinks"
+}
+
+get_sources() {
+    sources=$(pactl -f "json" list sources | jq '.' | jq -r '.[] | select(.name | test("alsa_input")) | {
+  "name": .name, 
+  "active_port": .active_port,
+  "ports": [.ports[] | select(.availability != "not available")]
+  }')
+    echo $sources
+    eww update audio_sources="$sources"
+}
+
 case $1 in
 "output")
     output_status
@@ -62,6 +78,14 @@ case $1 in
 
 "listen")
     listen
+    ;;
+
+"sinks")
+    get_sinks
+    ;;
+
+"sources")
+    get_sources
     ;;
 
 *)

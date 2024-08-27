@@ -1,0 +1,262 @@
+(deflisten brightness
+  :initial "1"
+  "bash ~/.config/eww/scripts/get-brightness-info listen"
+)
+
+(defvar mic-dropdown-visible false)
+(defvar vol-dropdown-visible false)
+(defpoll audio_sinks
+  :initial "{'ports': []}"
+  :interval "480m"
+  "bash ~/.config/eww/scripts/get-audio-info sinks | jq '.'"
+)
+(defpoll audio_sources
+  :initial "{'ports': []}"
+  :interval "480m"
+  "bash ~/.config/eww/scripts/get-audio-info sources | jq '.'"
+)
+(defpoll wifi-on
+  :initial ""
+  :interval "24h"
+  "nmcli radio wifi"
+)
+(defpoll bt-on
+  :initial ""
+  :interval "24h"
+  "~/.config/eww/scripts/get-bt-status"
+)
+
+(defwidget quick-settings[]
+  (box
+    :class "quick-settings-box"
+    :orientation "v"
+    :space-evenly false
+    :spacing 2
+    (brightness-slider)
+    (volume-slider)
+    (mic-slider)
+    (box
+      :spacing 5
+      (toggle-widget
+        :onclick "
+        nmcli radio wifi ${wifi-on == 'enabled' ? 'off' : 'on'};
+        if [[ ${wifi-on} == 'enabled' ]]; then
+        eww update wifi-on='disabled';
+        else
+        eww update wifi-on='enabled';
+        fi
+        "
+        :active {wifi-on == 'enabled'}
+        (current_network
+          :show_ssid true
+        )
+      )
+      (toggle-widget
+        :onclick "
+        bluetooth toggle;
+        if [[ ${bt-on} == 'on' ]]; then
+        eww update bt-on='off';
+        else
+        eww update bt-on='on';
+        fi
+        "
+        :active {bt-on == 'on'}
+        (box
+          :space-evenly false
+          :spacing 5
+          :class "network-status"
+          (label :text "󰂯 ")
+          (label :text "Bluetooth")
+        )
+      )
+    )
+  )
+)
+
+(defwidget toggle-widget[onclick active]
+  (eventbox
+    :onclick onclick
+    (box
+      :class "toggler ${active ? 'active' : ''}"
+      :space-evenly false
+      :spacing 5
+      (children)
+    )
+  )
+)
+
+(defwidget volume-slider[]
+  (box
+    :space-evenly false
+    :orientation "v"
+    (box
+      :hexpand true
+      :orientation "h"
+      :space-evenly false
+      :class "slider-container ${vol-dropdown-visible ? 'highlight' : ''}"
+      (audio
+        :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        :text "${audio-info.volume.icon} "
+      )
+      (box
+        :hexpand true
+        (scale
+          :value "${audio-info.volume.level}"
+          :max "101"
+          :round-digits 0
+          :onchange "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ {}%"
+          :timeout "50ms"
+          :tooltip "${audio-info.volume.level}"
+          :class "slider"
+        )
+      )
+      (button
+        :onclick "
+        ~/.config/eww/scripts/get-audio-info sinks
+        eww update vol-dropdown-visible=${!vol-dropdown-visible};
+        "
+        :css "button {margin: 0 0 0 1rem;}"
+        (label
+          :css "label {font-size: 1.5rem;}"
+          :text "${vol-dropdown-visible ? '󰅀' : '󰅂'}"
+        )
+      )
+    )
+    (volume-sources)
+  )
+)
+
+(defwidget volume-sources[]
+  (revealer
+    :transition "slidedown"
+    :reveal vol-dropdown-visible
+    (box
+      :orientation "v"
+      :spacing 5
+      :class "audio_sources_container ${vol-dropdown-visible ? 'highlight' : ''}"
+      (for sink in {audio_sinks.ports}
+        (eventbox
+          :halign "start"
+          :hexpand true
+          :onclick "
+          pactl set-sink-port ${audio_sinks.name} ${sink.name} &
+          ~/.config/eww/scripts/get-audio-info sinks &
+          "
+          :class "audio_source"
+          (box
+            :space-evenly false
+            :spacing 2
+            :hexpand true
+            (label
+              :text "${audio_sinks.active_port == sink.name ? ' 󱄠 ' : ' 󱁐 '}"
+            )
+            (label
+              :text "${sink.description}"
+            )
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwidget mic-slider[]
+  (box
+    :orientation "v"
+    :space-evenly false
+    (box
+      :hexpand true
+      :orientation "h"
+      :space-evenly false
+      :class "slider-container ${mic-dropdown-visible ? 'highlight' : ''}"
+      (audio
+        :onclick "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        :text "${audio-info.microphone.icon} "
+      )
+      (box
+        :hexpand true
+        (scale
+          :value "${audio-info.microphone.level}"
+          :max "101"
+          :round-digits 0
+          :onchange "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ {}%"
+          :timeout "50ms"
+          :tooltip "${audio-info.microphone.level}"
+          :class "slider"
+        )
+      )
+      (button
+        :onclick "
+        ~/.config/eww/scripts/get-audio-info sources
+        eww update mic-dropdown-visible=${!mic-dropdown-visible};
+        "
+        :css "button {margin: 0 0 0 1rem;}"
+        (label
+          :css "label {font-size: 1.5rem;}"
+          :text "${mic-dropdown-visible ? '󰅀' : '󰅂'}"
+        )
+      )
+    )
+    (microphone-sources)
+  )
+)
+
+(defwidget microphone-sources[]
+  (revealer
+    :transition "slidedown"
+    :reveal mic-dropdown-visible
+    (box
+      :orientation "v"
+      :spacing 5
+      :class "audio_sources_container ${mic-dropdown-visible ? 'highlight' : ''}"
+      (for source in {audio_sources.ports}
+        (eventbox
+          :halign "start"
+          :hexpand true
+          :onclick "
+          pactl set-source-port ${audio_sources.name} ${source.name} &
+          ~/.config/eww/scripts/get-audio-info sources &
+          "
+          :class "audio_source"
+          (box
+            :space-evenly false
+            :spacing 2
+            :hexpand true
+            (label
+              :text "${audio_sources.active_port == source.name ? ' 󰍬 ' : ' 󱁐 '}"
+            )
+            (label
+              :text "${source.description}"
+            )
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwidget brightness-slider[]
+  (box
+    :orientation "h"
+    :hexpand true
+    :space-evenly false
+    :class "slider-container"
+    (label
+      :text "${brightness.icon} "
+    )
+    (box
+      :hexpand true
+      :css "box{margin-left: 6px;}"
+      (scale
+        :value "${brightness.level}"
+        :max "101"
+        :min "1"
+        :round-digits 0
+        :onchange "brightnessctl set {}%"
+        :timeout "50ms"
+        :class "slider"
+        :tooltip "${brightness.level}"
+      )
+    )
+  )
+)

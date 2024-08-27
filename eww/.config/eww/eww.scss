@@ -1,3 +1,22 @@
+$base: #1e1e2e;
+$accent: #f5e0dc;
+$surface0: #313244;
+$surface1: #45475a;
+$surface2: #585b70;
+$text: #cdd6f4;
+$subtext1: #bac2de;
+$subtext2: #a6adc8;
+$overlay0: #6c7086;
+$overlay1: #7f849c;
+$overlay2: #9399b2;
+$mantle: #181825;
+$crust: #11111b;
+$transition: all 0.195s ease-out 0.15s;
+
+@import "./scss/control-center.scss";
+@import "./scss/network.scss";
+@import "./scss/quick-settings.scss";
+
 * {
   all: unset;
   font-family: "FiraCode Nerd Font";
@@ -12,18 +31,22 @@
 }
 
 .bar {
-  background-color: #1e1e2e;
-  color: #f2cdcd;
+  background-color: $base;
+  color: $text;
   padding: 2px 0px;
 }
 
-.workspace-entry.current.empty,
-.occupied {
-  opacity: 1;
+.workspace-entry {
+  &.current.empty {
+    opacity: 1;
+  }
+  &.empty {
+    opacity: 0;
+  }
 }
 
-.workspace-entry.empty {
-  opacity: 0;
+.occupied {
+  opacity: 1;
 }
 
 .shutdown-button:hover {
@@ -35,26 +58,9 @@
   padding: 0 5px;
 }
 
-.network-toggle:hover {
-  background-color: #2d2d46;
-}
-
-.dropdown-window {
-  background-color: #1e1e2e;
-  border: 1px solid #2d2d46;
-  border-radius: 10px;
-  padding: 10px 15px;
-}
-
 .container {
   padding: 3px 6px;
   font-size: 0.8rem;
-}
-
-.network:hover {
-  background-color: #2d2d46;
-  border-radius: 5px;
-  transition: all 0.1s ease 0.1s;
 }
 
 .workspaces {
@@ -65,39 +71,13 @@
   padding: 0px 5px;
 }
 
-.systems-dropdown-toggle:hover {
-  background-color: #2d2d46;
-  border-radius: 15px;
-  transition: all 0.1s ease 0.1s;
-}
-
 .volume {
   font-size: 18px;
 }
 
-.slider trough {
-  background-color: #161620;
-  padding: 1px;
-}
-
-.slider slider {
-  background-color: #af8282;
-  margin: -6px;
-  border-radius: 50%;
-}
-
-.slider highlight {
-  padding: 1px;
-  background-color: #2d2d46;
-}
-
-.bgt {
-  margin-left: 2px;
-}
-
 tooltip {
-  background-color: #1e1e2e;
-  color: #f2cdcd;
+  background-color: $surface0;
+  color: $subtext1;
   border-radius: 5px;
   font-size: 12px;
 }

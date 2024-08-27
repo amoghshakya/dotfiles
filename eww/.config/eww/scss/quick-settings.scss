@@ -1,0 +1,69 @@
+.quick-settings-box {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.slider {
+  trough {
+    background-color: $mantle;
+    border-radius: 15px;
+  }
+
+  slider {
+    background-color: $accent;
+    margin: -6px;
+    border-radius: 50%;
+  }
+
+  highlight {
+    border-radius: 15px;
+    padding: 3px;
+    background-color: $surface0;
+  }
+}
+
+.slider-container {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  transition: $transition;
+}
+
+.highlight {
+  background-color: $surface0;
+  highlight {
+    background-color: $surface1;
+  }
+}
+
+.audio_sources_container {
+  transition: $transition;
+  // background-color: $surface0;
+  padding: 1rem 0.8rem;
+  border-radius: 15px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.audio_source {
+  & > box {
+    padding: 0.4rem;
+  }
+
+  &:hover {
+    background-color: $surface1;
+  }
+}
+
+.toggler {
+  transition: $transition;
+  border-radius: 2rem;
+  padding: 0.8rem;
+  background-color: $surface0;
+
+  &.active {
+    background-color: $accent;
+    color: $base;
+  }
+}

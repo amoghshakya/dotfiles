@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+state=$(eww get open-control-center)
+
+function open_control_center() {
+    if [[ -z $(eww active-windows | grep '*control-center') ]]; then
+        eww open control-center
+    fi
+    eww update open-control-center=true
+}
+
+function close_control_center() {
+    eww update open-control-center=false
+}
+
+case $1 in
+close)
+    close_control_center
+    exit 0
+    ;;
+esac
+
+case $state in
+true)
+    close_control_center
+    ;;
+false)
+    open_control_center
+    ;;
+esac

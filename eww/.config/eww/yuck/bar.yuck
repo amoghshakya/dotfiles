@@ -1,8 +1,9 @@
 (include "./yuck/workspaces.yuck")
 (include "./yuck/battery.yuck")
 (include "./yuck/audio.yuck")
-(include "./yuck/dropdown.yuck")
 (include "./yuck/network.yuck")
+(include "./yuck/control-center.yuck")
+(include "./yuck/quick-settings.yuck")
 
 
 (defpoll time
@@ -15,7 +16,7 @@
   (box
     :halign "end"
     :space-evenly true
-    (network-widget)
+    (current_network)
     (audio
       :onscroll "bash ~/.config/eww/scripts/on-scroll {}"
     )
@@ -47,16 +48,9 @@
       :halign "end"
       :class "systems-container"
       (eventbox
-        :onclick "
-        if [[ ${dropdown-visible} == 'true' ]]; then
-        eww update dropdown-visible=false;
-        eww close dropdown-window;
-        else
-        eww update dropdown-visible=true;
-        eww open dropdown-window;
-        fi
-        "
-        :class "systems-dropdown-toggle"
+        :onclick "~/.config/eww/scripts/toggle-control-center"
+        :timeout "100ms"
+        :class "systems-dropdown-toggle ${open-control-center == 'true' ? 'visible' : ''}"
         (box
           :class "systems-container"
           (systems)

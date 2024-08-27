@@ -1,0 +1,31 @@
+(defvar open-control-center false)
+
+(defwidget control-center[]
+  (revealer
+    :transition "slideleft"
+    :reveal open-control-center
+    (box
+      (box
+        :orientation "v"
+        :space-evenly false
+        :class "control_center"
+        (quick-settings)
+      )
+      (children) ; something
+    )
+  )
+)
+
+(defwindow control-center
+  :monitor 0
+  :stacking "overlay"
+  :geometry (geometry
+    :anchor "top right"
+    :x "-1%"
+    :y "1%"
+  )
+  :floating true
+  :exclusive true
+  (control-center)
+)
+
