@@ -11,4 +11,4 @@ exec easyeffects --gapplication-service > /dev/null 2>&1 &
 
 # eww
 eww daemon &
-eww open bar
+eww open-many bar control-center
