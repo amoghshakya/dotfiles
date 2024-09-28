@@ -5,6 +5,8 @@ local options = {
     html = { "prettier" },
     javascript = { "prettier", "prettierd", stop_after_first = true },
     python = { "isort", "black" },
+    c = { "clang-format" },
+    cpp = { "clang-format" },
   },
 
   format_on_save = {

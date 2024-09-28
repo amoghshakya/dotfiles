@@ -52,7 +52,6 @@
         :timeout "100ms"
         :class "systems-dropdown-toggle ${open-control-center == 'true' ? 'visible' : ''}"
         (box
-          :class "systems-container"
           (systems)
         )
       )

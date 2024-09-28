@@ -17,6 +17,13 @@ $transition: all 0.195s ease-out 0.15s;
 @import "./scss/network.scss";
 @import "./scss/quick-settings.scss";
 
+@mixin widget {
+  background-color: $base;
+  border: 1px solid $overlay1;
+  border-radius: 15px;
+  margin: 0 5px;
+}
+
 * {
   all: unset;
   font-family: "FiraCode Nerd Font";
@@ -27,26 +34,23 @@ $transition: all 0.195s ease-out 0.15s;
 }
 
 .time-container {
+  @include widget;
+  padding: 0 10px;
   font-size: 12px;
 }
 
 .bar {
-  background-color: $base;
+  // background-color: $base;
   color: $text;
   padding: 2px 0px;
 }
 
-.workspace-entry {
-  &.current.empty {
-    opacity: 1;
-  }
-  &.empty {
-    opacity: 0;
-  }
+.current {
+  font-weight: 800;
 }
 
-.occupied {
-  opacity: 1;
+.occupied:not(.current) {
+  opacity: 0.6;
 }
 
 .shutdown-button:hover {
@@ -64,12 +68,14 @@ $transition: all 0.195s ease-out 0.15s;
 }
 
 .workspaces {
-  padding: 0px 10px;
+  @include widget;
+  padding: 0 10px;
 }
 
 .systems-container {
-  padding: 0px 5px;
+  @include widget;
 }
+
 
 .volume {
   font-size: 18px;

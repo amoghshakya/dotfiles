@@ -1,3 +1,5 @@
+fortune -a | fmt -80 -s | $(shuf -n 1 -e cowsay cowthink) -$(shuf -n 1 -e b d g p s t w y) -f $(shuf -n 1 -e $(cowsay -l | tail -n +2)) -n
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -21,11 +23,16 @@ zinit ice depth"1" # git clone depth
 zinit light romkatv/powerlevel10k
 
 # Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
+    Aloxaf/fzf-tab
 
-zinit lucid wait for \
+zinit wait lucid for \
   "zsh-users/zsh-completions"
 
 zinit snippet OMZP::git 
@@ -33,11 +40,6 @@ zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::nvm
 zinit snippet OMZP::archlinux
-
-# Load completions
-autoload -Uz compinit && compinit
-
-zinit cdreplay -q
 
 # History
 HISTSIZE=5000
@@ -93,3 +95,22 @@ export NVM_DIR="$HOME/.nvm"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/am/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/am/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/am/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/am/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+export PATH=/home/am/.local/bin:$PATH

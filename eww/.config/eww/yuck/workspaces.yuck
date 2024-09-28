@@ -3,16 +3,17 @@
 (defwidget workspaces []
   (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}" :class "workspaces-widget"
     (box
-      :space-evenly true
+      :space-evenly false
       :spacing 5
       :class "workspaces"
       (label :text "${workspaces}${current_workspace}" :visible false)
       (for workspace in workspaces
         (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
           (box
-            :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
+            :class "workspace-entry ${workspace.id == current_workspace ? 'current' : ''} ${workspace.windows > 0 ? 'occupied' : 'empty'}"
             (label
-            :text "${workspace.id == current_workspace ? "" : ""}")
+            :visible "${workspace.windows > 0 || workspace.id == current_workspace}"
+            :text "${workspace.id}")
           )
         )
       )

@@ -1,10 +1,6 @@
-// window
-// .control-center {
-//   border: 1px solid white;
-// }
-
 .control_center {
   background-color: $base;
+  border: 1px solid $overlay1;
   border-radius: 1rem;
   padding: 0.3rem;
   box-shadow: 0 2px 8px 1px $mantle;
@@ -12,14 +8,20 @@
 }
 
 .systems-dropdown-toggle {
-  border-radius: 15px;
-  transition: all 0.1s ease 0.1s;
-
+  & > box {
+    transition: all 0.1s ease 0.1s;
+    border-radius: 15px;
+    padding: 0 5px;
+  }
   &:hover {
-    background-color: $surface0;
+    & > box {
+      background-color: $surface0;
+    }
   }
 
   &.visible {
-    background-color: $surface0;
+    & > box {
+      background-color: $surface0;
+    }
   }
 }
