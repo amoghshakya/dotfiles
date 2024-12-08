@@ -4,7 +4,7 @@ local options = {
     css = { "prettier" },
     html = { "prettier" },
     javascript = { "prettier", "prettierd", stop_after_first = true },
-    python = { "isort", "black" },
+    python = { "autopep8", "isort", "black" },
     c = { "clang-format" },
     cpp = { "clang-format" },
   },

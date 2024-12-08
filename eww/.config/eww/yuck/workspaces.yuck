@@ -8,11 +8,12 @@
       :class "workspaces"
       (label :text "${workspaces}${current_workspace}" :visible false)
       (for workspace in workspaces
-        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+        (eventbox 
+          :onclick "hyprctl dispatch workspace ${workspace.id}"
+          :visible "${workspace.windows > 0 || workspace.id == current_workspace}"
           (box
             :class "workspace-entry ${workspace.id == current_workspace ? 'current' : ''} ${workspace.windows > 0 ? 'occupied' : 'empty'}"
             (label
-            :visible "${workspace.windows > 0 || workspace.id == current_workspace}"
             :text "${workspace.id}")
           )
         )

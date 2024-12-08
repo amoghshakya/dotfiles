@@ -10,5 +10,5 @@ exec easyeffects --gapplication-service > /dev/null 2>&1 &
 # nm-applet --indicator &
 
 # eww
-eww daemon &
+eww daemon &&
 eww open-many bar control-center

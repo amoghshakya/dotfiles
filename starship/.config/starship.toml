@@ -35,7 +35,7 @@ symbol = " "
 [conda]
 ignore_base = false
 format = "[( $symbol$environment) ](green)"
-symbol = " "
+symbol = " "
 
 [crystal]
 symbol = " "
@@ -169,6 +169,7 @@ symbol = " "
 
 [python]
 symbol = " "
+pyenv_version_name = false
 
 [rlang]
 symbol = "󰟔 "
