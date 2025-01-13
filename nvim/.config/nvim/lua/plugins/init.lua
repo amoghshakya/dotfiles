@@ -1,15 +1,30 @@
 return {
   {
     "stevearc/conform.nvim",
-    lazy = false,
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = "BufWritePre", -- uncomment for format on save
     opts = require "configs.conform",
   },
+
+  {
+    "nvzone/volt",
+    lazy = true,
+  },
+
+  {
+    "nvzone/menu",
+    lazy = true,
+  },
+
   {
     "neovim/nvim-lspconfig",
     config = function()
       require "configs.lspconfig"
     end,
+  },
+
+  {
+    "github/copilot.vim",
+    lazy = false,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -23,16 +38,13 @@ return {
       },
     },
   },
-  {
-    "p00f/clangd_extensions.nvim",
-  },
+  -- {
+  --   "p00f/clangd_extensions.nvim",
+  -- },
   {
     "lervag/vimtex",
     lazy = false, -- we don't want to lazy load VimTeX
     -- tag = "v2.15", -- uncomment to pin to a specific release
-    init = function()
-      -- VimTeX configuration goes here, e.g.
-      vim.g.vimtex_view_method = "zathura"
-    end,
+    init = require "configs.vimtex",
   },
 }

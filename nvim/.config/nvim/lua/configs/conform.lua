@@ -7,6 +7,8 @@ local options = {
     python = { "autopep8", "isort", "black" },
     c = { "clang-format" },
     cpp = { "clang-format" },
+    tex = { "latexindent" },
+    bib = { "bibtidy" },
   },
 
   format_on_save = {

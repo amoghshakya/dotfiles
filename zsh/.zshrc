@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -17,24 +10,15 @@ fi
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-zinit ice depth"1" # git clone depth
-zinit light romkatv/powerlevel10k
+# zinit ice depth"1" # git clone depth
+# zinit light romkatv/powerlevel10k
 
-# zinit ice as"command" from"gh-r" \
-#           atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
-#           atpull"%atclone" src"init.zsh"
-# zinit light starship/starship
+zinit ice as"command" from"gh-r" \
+          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+          atpull"%atclone" src"init.zsh"
+zinit light starship/starship
 
 # Add in zsh plugins
-# zinit wait lucid for \
-#  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-#     zdharma-continuum/fast-syntax-highlighting \
-#  blockf \
-#     zsh-users/zsh-completions \
-#  atload"!_zsh_autosuggest_start" \
-#     zsh-users/zsh-autosuggestions \
-#     Aloxaf/fzf-tab
-
 zinit wait lucid for \
   atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
   zdharma-continuum/fast-syntax-highlighting \
@@ -87,6 +71,8 @@ export FZF_DEFAULT_OPTS=" \
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
+
+# other stuff
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -115,9 +101,16 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 
-export PATH=/home/am/.local/bin:$PATH
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 . "/home/am/.deno/env"
+
+
+export PATH="/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$PATH"
+
+PATH="/home/am/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/am/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/am/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/am/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/am/perl5"; export PERL_MM_OPT;
