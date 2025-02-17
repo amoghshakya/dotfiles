@@ -1,17 +1,14 @@
 local config = function()
-  -- VimTeX configuration goes here, e.g.
-  vim.g.vimtex_view_method = "zathura"
+  vim.g.vimtex_view_method = "zathura_simple"
+  vim.g.vimtex_compiler_method = "latexmk"
   vim.g.vimtex_compiler_latexmk = {
+    build_dir = "out",
+    aux_dir = "out",
     options = {
       "--shell-escape",
-      "-pdf",
-      "-synctex=1",
-      "-interaction=nonstopmode",
-      "-file-line-error",
       "-outdir=out",
     },
   }
-  vim.g.vimtex_format_enabled = 1
 end
 
 return config
