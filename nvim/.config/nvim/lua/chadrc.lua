@@ -6,8 +6,8 @@
 local M = {}
 
 M.base46 = {
-  theme = "catppuccin",
-  theme_toggle = { "catppuccin", "one_light" },
+  theme = "rosepine",
+  theme_toggle = { "rosepine", "one_light" },
 
   hl_override = {
     Comment = { italic = true },
@@ -17,7 +17,7 @@ M.base46 = {
 
 M.nvdash = {
   load_on_startup = true,
-  header = require("_ascii").MF_DooM_graffiti,
+  header = require("_ascii").sharp,
 }
 
 return M

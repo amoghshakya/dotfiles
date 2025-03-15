@@ -4,7 +4,7 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "cssls", "pyright", "rust_analyzer", "clangd", "ts_ls", "eslint", "jinja_lsp", "texlab", "ltex" }
+local servers = { "html", "cssls", "pyright", "rust_analyzer", "clangd", "ts_ls", "eslint", "texlab", "jsonls" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
@@ -16,26 +16,30 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-lspconfig.html.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = capabilities,
-}
-
-lspconfig.ltex.setup {
-  on_attach = nvlsp.on_attach,
+lspconfig.ltex_plus.setup {
+  on_attach = function(client, bufnr)
+    nvlsp.on_attach(client, bufnr)
+    require("ltex_extra").setup {
+      path = vim.fn.expand "~/.local/share/nvim/ltex/",
+      load_langs = { "en-US" },
+      init_check = true,
+    }
+  end,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
   settings = {
     ltex = {
       language = "en-US",
-      enabled = { "latex", "tex", "bib", "markdown" },
-      diagnosticSeverity = "information",
+      completionEnabled = true,
+      enabled = { "latex", "tex", "markdown", "mdx" },
       additionalRules = {
         enablePickyRules = true,
-        motherTongue = "en",
+        motherTongue = "en-US",
+      },
+      latex = {
+        commands = {
+          ["\\caption"] = "ignore",
+        },
       },
     },
   },

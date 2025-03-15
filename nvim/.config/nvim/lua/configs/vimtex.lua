@@ -5,8 +5,9 @@ local config = function()
     build_dir = "out",
     aux_dir = "out",
     options = {
-      "--shell-escape",
-      "-outdir=out",
+      "-pdf",
+      "-synctex=1",
+      "-shell-escape",
     },
   }
 end

@@ -52,8 +52,14 @@ return {
 
   {
     "lervag/vimtex",
-    -- tag = "v2.15", -- uncomment to pin to a specific release
-    init = require "configs.vimtex",
     ft = { "tex", "latex", "plaintex" },
+    lazy = false,
+    init = require "configs.vimtex",
+  },
+
+  {
+    "barreiroleo/ltex_extra.nvim",
+    ft = { "tex", "latex", "markdown", "mdx" },
+    dependencies = { "neovim/nvim-lspconfig" },
   },
 }
