@@ -1,3 +1,5 @@
+fastfetch
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -10,14 +12,9 @@ fi
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-if command -v starship &> /dev/null; then
-    eval "$(starship init zsh)"
-else
-  zinit ice as"command" from"gh-r" \
-            atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
-            atpull"%atclone" src"init.zsh"
-  zinit light starship/starship
-fi
+# starship prompt
+# requires starship to be installed
+eval "$(starship init zsh)"
 
 # Add in zsh plugins
 zinit wait lucid for \
@@ -29,8 +26,7 @@ zinit wait lucid for \
 
 zinit snippet OMZP::git 
 zinit snippet OMZP::sudo
-zinit snippet OMZP::nvm
-zinit snippet OMZP::archlinux
+zinit snippet OMZP::command-not-found
 
 # History
 HISTSIZE=10000

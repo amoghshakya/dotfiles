@@ -10,7 +10,6 @@ local options = {
     c = { "clang-format" },
     cpp = { "clang-format" },
     tex = { "latexindent" },
-    plaintex = { "latexindent" },
     bib = { "bibtex-tidy" },
   },
 
@@ -18,14 +17,12 @@ local options = {
     latexindent = {
       command = "latexindent",
       args = { "-m", "-l", "-g=/dev/null" },
-      "--yaml=indentChar:'  '",
     },
   },
 
   format_on_save = {
     -- These options will be passed to conform.format()
     timeout_ms = 500,
-    lsp_format = "fallback",
   },
 }
 

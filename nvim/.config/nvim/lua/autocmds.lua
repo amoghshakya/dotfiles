@@ -1,13 +1,17 @@
-require "nvchad.autocmds"
-
 local autocmd = vim.api.nvim_create_autocmd
 
-autocmd("VimEnter", {
-  command = ":silent !kitty @ set-spacing padding=0 margin=0",
-})
+-- [[ Basic Autocommands ]]
+--  See `:help lua-guide-autocommands`
 
-autocmd("VimLeavePre", {
-  command = ":silent !kitty @ set-spacing padding=4 margin=default",
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
+autocmd("TextYankPost", {
+  desc = "Highlight when yanking (copying) text",
+  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
 
 autocmd("FileType", {
@@ -15,14 +19,5 @@ autocmd("FileType", {
   callback = function()
     vim.opt_local.spell = true
     vim.opt_local.spelllang = "en_us"
-  end,
-})
-
-vim.api.nvim_create_autocmd("BufDelete", {
-  callback = function()
-    local bufs = vim.t.bufs
-    if #bufs == 1 and vim.api.nvim_buf_get_name(bufs[1]) == "" then
-      vim.cmd "Nvdash"
-    end
   end,
 })
