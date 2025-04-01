@@ -13,6 +13,9 @@ local config = function()
   -- - sd'   - [S]urround [D]elete [']quotes
   -- - sr)'  - [S]urround [R]eplace [)] ["]
   require("mini.surround").setup()
+
+  -- Sessions
+  require("mini.sessions").setup()
 end
 
 return config

@@ -27,6 +27,7 @@ return {
         },
       },
     },
+    "onsails/lspkind.nvim",
     "saadparwaiz1/cmp_luasnip",
 
     -- Adds other completion capabilities.

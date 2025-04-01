@@ -17,15 +17,17 @@ local options = {
   formatters = {
     latexindent = {
       command = "latexindent",
-      args = { "-m", "-l", "-g=/dev/null" },
-      "--yaml=indentChar:'  '",
+      args = {
+        "-y=defaultIndent: '  '",
+        "-m",
+        "-g=/dev/null",
+      },
     },
   },
 
   format_on_save = {
     -- These options will be passed to conform.format()
     timeout_ms = 500,
-    lsp_format = "fallback",
   },
 }
 

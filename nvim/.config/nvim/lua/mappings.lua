@@ -37,8 +37,6 @@ map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 map("n", "<C-s>", "<cmd>write<CR>", { desc = "Save current file" })
 map("i", "<C-s>", "<cmd>write<CR>", { desc = "Save current file" })
 
-map("n", "<2-LeftMouse>", "gf", { noremap = true, silent = true })
-
 -- Terminals
 map({ "n", "t" }, "<A-h>", "<Cmd>ToggleTerm direction=horizontal<CR>", { desc = "Toggle horizontal terminal" })
 map({ "n", "t" }, "<A-v>", "<Cmd>ToggleTerm direction=vertical<CR>", { desc = "Toggle vertical terminal" })

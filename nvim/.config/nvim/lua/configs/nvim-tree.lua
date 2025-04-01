@@ -1,8 +1,8 @@
 local M = {}
 
 M.keys = {
-  { "<C-n>", ":NvimTreeToggle<CR>", desc = "Toggle NvimTree", silent = true, noremap = true },
-  { "<leader>e", ":NvimTreeFocus<CR>", desc = "Focus NvimTree", silent = true, noremap = true },
+  -- { "<C-n>", ":NvimTreeToggle<CR>", desc = "Toggle NvimTree", silent = true, noremap = true },
+  -- { "<leader>e", ":NvimTreeFocus<CR>", desc = "Focus NvimTree", silent = true, noremap = true },
 }
 
 M.opts = {

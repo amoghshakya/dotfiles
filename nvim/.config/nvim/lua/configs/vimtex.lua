@@ -10,11 +10,11 @@ local config = function()
       "-synctex=1",
       "-shell-escape",
     },
-    -- engine = "lualatex",
+    engine = "lualatex",
   }
-  -- vim.g.vimtex_compiler_latexmk_engines = {
-  --   _ = "-lualatex",
-  -- }
+  vim.g.vimtex_compiler_latexmk_engines = {
+    _ = "-lualatex",
+  }
 end
 
 return config

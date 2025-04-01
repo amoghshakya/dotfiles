@@ -1,18 +1,32 @@
 local M = {}
 
+local excluded_filetypes = {
+  "TelescopePrompt",
+  "toggleterm",
+  "snacks_dashboard",
+  "neo-tree",
+}
+
+local exclude = function()
+  return not vim.tbl_contains(excluded_filetypes, vim.bo.filetype)
+end
+
 M.opts = {
   options = {
     theme = "auto",
     section_separators = { left = "", right = "" },
     component_separators = { left = "", right = "" },
     globalstatus = true, -- Show one statusline across splits (optional but nice)
+    disabled_filetypes = {
+      statusline = { "alpha", "lazy", "mason" },
+      winbar = {},
+    },
   },
   refresh = {
     statusline = 100,
     tabline = 100,
     winbar = 100,
   },
-  disabled_filetypes = {},
   sections = {
     lualine_a = {
       {
@@ -22,9 +36,25 @@ M.opts = {
       },
     },
     lualine_b = { "branch", "diff", "diagnostics" },
-    lualine_c = { "filename" },
-    lualine_x = { "lsp_status", "encoding", "fileformat", "filetype" },
-    lualine_y = { "progress" },
+    lualine_c = {
+      {
+        "filename",
+        cond = exclude,
+      },
+    },
+    lualine_x = {
+      {
+        "lsp_status",
+        symbols = {
+          separator = " ~ ",
+        },
+      },
+      {
+        "filetype",
+        cond = exclude,
+      },
+    },
+    lualine_y = {},
     lualine_z = {
       {
         "location",

@@ -63,19 +63,24 @@ M.opts = {
     Comment = { fg = "muted" },
     VertSplit = { fg = "muted", bg = "muted" },
     BufferLineFill = { bg = "base" },
-    BufferLineOffsetSeparator = { fg = "text", bg = "base", inherit = false },
+    -- BufferLineOffsetSeparator = { fg = "text", bg = "base", inherit = false },
+    TelescopePromptBorder = { bg = "highlight_low" },
+    TelescopePromptNormal = { bg = "highlight_low" },
+    TelescopePromptTitle = { bg = "rose", fg = "base" },
+    TelescopeMatching = { fg = "subtle" },
+    TelescopePreviewTitle = { bg = "love", fg = "base" },
   },
 
   before_highlight = function(group, highlight, palette)
     -- Disable all undercurls
-    -- if highlight.undercurl then
-    --     highlight.undercurl = false
-    -- end
+    if highlight.undercurl then
+      highlight.undercurl = false
+    end
     --
     -- Change palette colour
-    -- if highlight.fg == palette.pine then
-    --     highlight.fg = palette.foam
-    -- end
+    if highlight.fg == palette.pine then
+      highlight.fg = palette.foam
+    end
   end,
 }
 

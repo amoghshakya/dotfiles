@@ -22,18 +22,16 @@ return { -- Fuzzy Finder (files, lsp, etc)
     -- Useful for getting pretty icons, but requires a Nerd Font.
     { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
   },
-  config = function()
-    -- [[ Configure Telescope ]]
-    -- See `:help telescope` and `:help telescope.setup()`
-    require("telescope").setup({
-      -- You can put your default mappings / updates / etc. in here
-      --  All the info you're looking for is in `:help telescope.setup()`
-      --
+  opts = function()
+    return {
       defaults = {
         mappings = {
           i = { ["<c-enter>"] = "to_fuzzy_refine" },
           n = { ["q"] = require("telescope.actions").close },
         },
+        winblend = 0,
+        borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+        border = true,
         prompt_prefix = "   ",
         selection_caret = " ",
         entry_prefix = " ",
@@ -46,6 +44,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
           width = 0.87,
           height = 0.80,
         },
+        layout_strategy = "horizontal",
+        color_devicons = true,
       },
       -- pickers = {}
       extensions = {
@@ -53,8 +53,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
           require("telescope.themes").get_dropdown(),
         },
       },
-    })
-
+    }
+  end,
+  init = function()
     -- Enable Telescope extensions if they are installed
     pcall(require("telescope").load_extension, "fzf")
     pcall(require("telescope").load_extension, "ui-select")
@@ -71,7 +72,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
     vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
-    vim.keymap.set("n", "<leader>sgc", builtin.git_commits, { desc = "[S]earch [G]it [C]ommits" })
+    vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "[S]earch [G]it [C]ommits" })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set("n", "<leader>/", function()

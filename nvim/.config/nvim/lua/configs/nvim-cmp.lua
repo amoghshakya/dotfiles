@@ -4,6 +4,8 @@ local config = function()
   local luasnip = require("luasnip")
   luasnip.config.setup({})
 
+  local lspkind = require("lspkind")
+
   cmp.setup({
     snippet = {
       expand = function(args)
@@ -13,6 +15,15 @@ local config = function()
     window = {
       completion = cmp.config.window.bordered(),
       documentation = cmp.config.window.bordered(),
+    },
+    formatting = {
+      format = lspkind.cmp_format({
+        mode = "text_symbol",
+        maxwidth = 50,
+        ellipsis_char = "...",
+      }),
+      expandable_indicator = false,
+      fields = { "kind", "abbr", "menu" },
     },
     completion = { completeopt = "menu,menuone,noinsert" },
 

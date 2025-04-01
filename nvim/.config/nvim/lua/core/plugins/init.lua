@@ -1,5 +1,6 @@
 return {
   require("core.plugins.treesitter"),
+  require("core.plugins.snacks"),
   require("core.plugins.nvim-cmp"),
   require("core.plugins.lsp"),
   require("core.plugins.debug"),
@@ -7,6 +8,7 @@ return {
   require("core.plugins.lint"),
   require("core.plugins.gitsigns"),
   require("core.plugins.which-key"),
+  require("core.plugins.neo-tree"),
   "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
   { -- Autoformat
     "stevearc/conform.nvim",
@@ -30,7 +32,6 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = { signs = false },
   },
-
   { -- Collection of various small independent plugins/modules
     "echasnovski/mini.nvim",
     config = require("configs.mini"),
@@ -48,37 +49,15 @@ return {
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
   },
-  { -- Add indentation guides even on blank lines
-    "lukas-reineke/indent-blankline.nvim",
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
-    main = "ibl",
-    opts = {},
-  },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = require("configs.lualine").opts,
   },
-  {
-    "nvim-tree/nvim-tree.lua",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = require("configs.nvim-tree").opts,
-    keys = require("configs.nvim-tree").keys,
-    init = function()
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-
-      -- optionally enable 24-bit colour
-      vim.opt.termguicolors = true
-    end,
-  },
   { -- Tabs
     "akinsho/bufferline.nvim",
     version = "*",
-    event = "VeryLazy",
+    event = "ColorScheme",
     dependencies = "nvim-tree/nvim-web-devicons",
     keys = require("configs.bufferline").keys,
     opts = require("configs.bufferline").opts,

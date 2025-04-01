@@ -56,14 +56,11 @@ return {
         ts_ls = {},
         jsonls = {},
         texlab = {
-          settings = {
-            texlab = {
-              latexFormatter = "latexindent",
-              latexindent = {
-                modifyLineBreaks = false,
-              },
-            },
-          },
+          on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+            lsp_attach(client, bufnr)
+          end,
         },
         ltex_plus = {
           on_attach = function(client, bufnr)
@@ -88,6 +85,7 @@ return {
                   ["\\caption"] = "ignore",
                 },
               },
+              diagnosticDelay = "1000ms",
             },
           },
         },
