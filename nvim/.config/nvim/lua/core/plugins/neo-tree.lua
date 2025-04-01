@@ -11,15 +11,37 @@ return {
   },
   cmd = "Neotree",
   keys = {
-    { "<C-n>", ":Neotree reveal<CR>", desc = "NeoTree reveal", silent = true },
+    { "<C-n>", ":Neotree toggle<CR>", desc = "NeoTree toggle", silent = true },
+    { "<Leader>e", ":Neotree focus<CR>", desc = "NeoTree focus", silent = true },
   },
   opts = {
-    filesystem = {
-      window = {
-        mappings = {
-          ["<C-n>"] = "close_window",
+    source_selector = {
+      statusline = true,
+    },
+    default_component_configs = {
+      git_status = {
+        symbols = {
+          added = "✚", -- or "✚"
+          modified = "M", -- or ""
+          deleted = "✖", -- this can only be used in the git_status source
+          renamed = "➜", -- this can only be used in the git_status source
+          untracked = "U", -- this can only be used in the git_status source
         },
       },
     },
+    filesystem = {
+      filtered_items = {
+        hide_dotfiles = false,
+        hide_gitignored = true,
+      },
+      window = {
+        mappings = {
+          ["<C-n>"] = "close_window",
+          ["<leader>r"] = "refresh",
+          ["h"] = "toggle_hidden",
+        },
+      },
+    },
+    close_if_last_window = true,
   },
 }
