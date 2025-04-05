@@ -14,10 +14,21 @@ autocmd("TextYankPost", {
   end,
 })
 
+-- Enable spell checking for LaTeX files
+-- Kinda annoying to have this on by default
+-- but it's useful if English is not your first language
 autocmd("FileType", {
   pattern = "tex",
   callback = function()
     vim.opt_local.spell = true
     vim.opt_local.spelllang = "en_us"
+  end,
+})
+
+-- Close windows with `q`
+autocmd("FileType", {
+  pattern = { "qf", "help" },
+  callback = function()
+    vim.keymap.set("n", "q", "<cmd>bd<CR>", { silent = true, buffer = true })
   end,
 })

@@ -10,7 +10,7 @@ return {
     dashboard = {
       enabled = true,
       preset = {
-        header = table.concat(require("ascii").bloody, "\n"),
+        header = table.concat(require("ascii").sharp, "\n"),
         keys = {
           { icon = " ", key = "f", desc = "Find file", action = ":Telescope find_files" },
           { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
@@ -34,7 +34,12 @@ return {
         },
       },
     },
-    indent = { enabled = true },
+    indent = {
+      enabled = true,
+      animation = {
+        easing = "cubic-in-out",
+      },
+    },
     input = { enabled = true },
     lazygit = {
       enabled = true,
@@ -57,5 +62,5 @@ return {
     statuscolumn = { enabled = true },
     words = { enabled = true },
   },
-  keys = require("configs.snacks").keys,
+  keys = require("core.configs.snacks").keys,
 }

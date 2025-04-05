@@ -37,5 +37,5 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-nvim-lsp-signature-help",
   },
-  config = require("configs.nvim-cmp"),
+  config = require("core.configs.nvim-cmp"),
 }

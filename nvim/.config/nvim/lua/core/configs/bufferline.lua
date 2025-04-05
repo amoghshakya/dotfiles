@@ -8,22 +8,28 @@ M.opts = function()
       mode = "buffers", -- or "tabs"
       numbers = "none", -- or "ordinal" or "buffer_id"
       indicator = {
-        style = "icon", -- can be "underline" or "none"
-        icon = "", -- default: '▎'
+        style = "underline", -- can be "underline" or "none"
       },
-      modified_icon = "●",
+      modified_icon = "",
+      close_icon = "",
+      buffer_close_icon = "",
+      left_trunc_marker = "",
       right_trunc_marker = "",
       max_name_length = 18,
       max_prefix_length = 15,
       tab_size = 20,
       diagnostics = "nvim_lsp", -- show LSP diagnostics in tab
+      diagnostics_indicator = function(count, level, _, _)
+        local icon = level:match("error") and " " or " "
+        return " " .. icon .. count
+      end,
+      diagnostics_update_in_insert = false,
       custom_filter = function(buf, buf_nums)
-        local exclude = { "NvimTree", "toggleterm", "quickfix", "snacks_picker_list" }
+        local exclude = { "toggleterm", "quickfix", "nofile" }
         local buftype = vim.bo[buf].buftype
 
         return not vim.tbl_contains(exclude, buftype)
       end,
-      diagnostics_update_in_insert = false,
       offsets = {
         {
           filetype = "neo-tree",
@@ -37,12 +43,12 @@ M.opts = function()
         },
       },
       show_buffer_icons = true,
-      show_buffer_close_icons = true,
+      show_buffer_close_icons = false,
       show_close_icon = true,
       show_tab_indicators = true,
-      persist_buffer_sort = true,
-      separator_style = "thick", -- options: "slant", "thick", "thin", "slope", "padded_slant", etc.
       enforce_regular_tabs = false,
+      persist_buffer_sort = true,
+      separator_style = { "▏", "▏" },
       always_show_bufferline = true,
       hover = {
         enabled = true,
@@ -56,7 +62,6 @@ end
 M.keys = {
   { "<Tab>", ":BufferLineCycleNext<CR>", desc = "Next buffer", silent = true },
   { "<S-Tab>", ":BufferLineCyclePrev<CR>", desc = "Previous buffer", silent = true },
-  { "<leader>x", ":bdelete<CR>", desc = "Close active buffer", silent = true },
 }
 
 return M

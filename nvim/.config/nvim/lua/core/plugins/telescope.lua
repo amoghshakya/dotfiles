@@ -1,7 +1,8 @@
 return { -- Fuzzy Finder (files, lsp, etc)
   "nvim-telescope/telescope.nvim",
   event = "VimEnter",
-  branch = "0.1.x",
+  cmd = { "Telescope" },
+  -- branch = "0.1.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
     { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -47,7 +48,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
         layout_strategy = "horizontal",
         color_devicons = true,
       },
-      -- pickers = {}
+      pickers = {},
       extensions = {
         ["ui-select"] = {
           require("telescope.themes").get_dropdown(),
@@ -73,13 +74,15 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
     vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "[S]earch [G]it [C]ommits" })
+    vim.keymap.set("n", "<leader>ft", builtin.filetypes, { desc = "[F]ile[t]ypes" })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set("n", "<leader>/", function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
       builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-        winblend = 10,
         previewer = false,
+        winblend = 0,
+        borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
       }))
     end, { desc = "[/] Fuzzily search in current buffer" })
 

@@ -1,5 +1,6 @@
 local M = {}
 
+---@type vim.lsp.client.on_attach_cb
 M.on_attach = function(client, bufnr)
   local map = function(keys, func, desc, mode)
     vim.keymap.set(mode or "n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
@@ -26,6 +27,7 @@ end
 local make_capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities = vim.tbl_deep_extend("force", make_capabilities, require("cmp_nvim_lsp").default_capabilities())
 
+---@type vim.diagnostic.Opts
 M.diagnostics = {
   severity_sort = true,
   float = { border = "rounded", source = "if_many" },

@@ -11,20 +11,65 @@ return {
     "rose-pine/neovim",
     name = "rose-pine",
     priority = 1000,
-    opts = require("configs.rosepine").opts,
+    opts = require("custom.configs.rosepine").opts,
     init = function()
       vim.cmd("colorscheme rose-pine")
+    end,
+  },
+  {
+    "lukas-reineke/virt-column.nvim",
+    event = "BufReadPost",
+    opts = {
+      char = "│",
+    },
+    init = function()
+      vim.api.nvim_create_autocmd({ "InsertEnter", "CursorMoved" }, {
+        pattern = { "*.py", "*.lua" },
+        callback = function()
+          local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+          if col > 70 then
+            vim.opt_local.colorcolumn = "80"
+          else
+            vim.opt_local.colorcolumn = ""
+          end
+        end,
+      })
     end,
   },
   {
     "lervag/vimtex",
     ft = { "tex", "latex", "plaintex" },
     lazy = false,
-    init = require("configs.vimtex"),
+    init = require("custom.configs.vimtex"),
   },
   {
     "barreiroleo/ltex_extra.nvim",
     ft = { "tex", "latex", "markdown", "mdx" },
     dependencies = { "neovim/nvim-lspconfig" },
+  },
+  {
+    "nvzone/showkeys",
+    cmd = "ShowkeysToggle",
+    opts = {
+      position = "top-right",
+      excluded_modes = { "i" },
+      keyformat = {
+        ["<BS>"] = "󰁮 ",
+        ["<CR>"] = "󰘌",
+        ["<Space>"] = "󱁐",
+        ["<Up>"] = "󰁝",
+        ["<Down>"] = "󰁅",
+        ["<Left>"] = "󰁍",
+        ["<Right>"] = "󰁔",
+        ["<PageUp>"] = "Page 󰁝",
+        ["<PageDown>"] = "Page 󰁅",
+        ["<M>"] = "󰘵",
+        ["<C>"] = "󰘴",
+        ["<S>"] = "󰘶",
+      },
+    },
+    keys = {
+      { "<leader>kys", "<cmd>ShowkeysToggle<CR>", desc = "Showkeys Toggle" },
+    },
   },
 }

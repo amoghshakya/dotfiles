@@ -79,3 +79,6 @@ o.fillchars:append({ eob = " " })
 
 o.termguicolors = true
 o.cursorlineopt = "both"
+
+o.path:append("**")
+o.isfname:append(":")

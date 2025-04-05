@@ -31,12 +31,22 @@ return {
       },
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      { "j-hui/fidget.nvim", opts = {} },
+      {
+        "j-hui/fidget.nvim",
+        event = "LspAttach",
+        opts = {
+          progress = {
+            ignore = {
+              "ltex_plus",
+            },
+          },
+        },
+      },
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      local lsp_attach = require("configs.lsp").on_attach
-      local capabilities = require("configs.lsp").capabilities
+      local lsp_attach = require("core.configs.lsp").on_attach
+      local capabilities = require("core.configs.lsp").capabilities
 
       local mason_registry = require("mason-registry")
 
@@ -134,7 +144,7 @@ return {
         require("lspconfig")[server_name].setup(server)
       end
 
-      vim.diagnostic.config(require("configs.lsp").diagnostics)
+      vim.diagnostic.config(require("core.configs.lsp").diagnostics)
     end,
   },
 }

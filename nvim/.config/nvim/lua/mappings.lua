@@ -41,3 +41,14 @@ map("i", "<C-s>", "<cmd>write<CR>", { desc = "Save current file" })
 map({ "n", "t" }, "<A-h>", "<Cmd>ToggleTerm direction=horizontal<CR>", { desc = "Toggle horizontal terminal" })
 map({ "n", "t" }, "<A-v>", "<Cmd>ToggleTerm direction=vertical<CR>", { desc = "Toggle vertical terminal" })
 map({ "n", "t" }, "<A-i>", "<Cmd>ToggleTerm direction=float<CR>", { desc = "Toggle floating terminal" })
+
+-- Comment with <C-/>
+--  See `:help commentstring` for more information
+map("n", "<C-/>", "gcc", { desc = "Toggle comment", remap = true })
+map("v", "<C-/>", "gc", { desc = "Toggle comment", remap = true })
+
+map("n", "<2-LeftMouse>", "gf", { noremap = true, silent = true })
+
+-- Buffers
+map("n", "<leader>n", "<Cmd>enew<CR>", { desc = "New empty buffer", silent = true })
+map("n", "<leader>x", "<Cmd>bdelete<CR>", { desc = "Close bufer", silent = true })

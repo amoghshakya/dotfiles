@@ -23,7 +23,7 @@ return {
         desc = "[F]ormat buffer",
       },
     },
-    opts = require("configs.conform"),
+    opts = require("core.configs.conform"),
   },
   -- Highlight todo, notes, etc in comments
   {
@@ -32,9 +32,14 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = { signs = false },
   },
-  { -- Collection of various small independent plugins/modules
-    "echasnovski/mini.nvim",
-    config = require("configs.mini"),
+  -- { -- Collection of various small independent plugins/modules
+  --   "echasnovski/mini.nvim",
+  --   config = require("core.configs.mini"),
+  -- },
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    opts = {},
   },
   {
     "windwp/nvim-autopairs",
@@ -52,15 +57,15 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = require("configs.lualine").opts,
+    opts = require("core.configs.lualine").opts,
   },
   { -- Tabs
     "akinsho/bufferline.nvim",
     version = "*",
-    event = "ColorScheme",
+    event = "UIEnter",
     dependencies = "nvim-tree/nvim-web-devicons",
-    keys = require("configs.bufferline").keys,
-    opts = require("configs.bufferline").opts,
+    keys = require("core.configs.bufferline").keys,
+    opts = require("core.configs.bufferline").opts,
   },
   {
     "akinsho/toggleterm.nvim",
