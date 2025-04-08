@@ -1,15 +1,8 @@
 local M = {}
 
 M.opts = function()
-  local highlights = require("rose-pine.plugins.bufferline")
   return {
-    highlights = highlights,
     options = {
-      mode = "buffers", -- or "tabs"
-      numbers = "none", -- or "ordinal" or "buffer_id"
-      indicator = {
-        style = "underline", -- can be "underline" or "none"
-      },
       modified_icon = "",
       close_icon = "",
       buffer_close_icon = "",
@@ -19,12 +12,19 @@ M.opts = function()
       max_prefix_length = 15,
       tab_size = 20,
       diagnostics = "nvim_lsp", -- show LSP diagnostics in tab
-      diagnostics_indicator = function(count, level, _, _)
-        local icon = level:match("error") and " " or " "
-        return " " .. icon .. count
+      diagnostics_indicator = function(_, _, diag)
+        local icons = {
+          Error = " ",
+          Warn = " ",
+          Hint = " ",
+          Info = " ",
+        }
+        local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+          .. (diag.warning and icons.Warn .. diag.warning or "")
+        return vim.trim(ret)
       end,
       diagnostics_update_in_insert = false,
-      custom_filter = function(buf, buf_nums)
+      custom_filter = function(buf, _)
         local exclude = { "toggleterm", "quickfix", "nofile" }
         local buftype = vim.bo[buf].buftype
 
@@ -38,6 +38,11 @@ M.opts = function()
         },
         {
           filetype = "toggleterm",
+          text = "",
+          separator = false,
+        },
+        {
+          filetype = "help",
           text = "",
           separator = false,
         },
@@ -60,8 +65,9 @@ M.opts = function()
 end
 
 M.keys = {
-  { "<Tab>", ":BufferLineCycleNext<CR>", desc = "Next buffer", silent = true },
-  { "<S-Tab>", ":BufferLineCyclePrev<CR>", desc = "Previous buffer", silent = true },
+  { "<Tab>", "<CMD>BufferLineCycleNext<CR>", desc = "Next buffer", silent = true },
+  { "<S-Tab>", "<CMD>BufferLineCyclePrev<CR>", desc = "Previous buffer", silent = true },
+  { "<leader>bc", "<CMD>BufferLinePick<CR>", desc = "Pick buffer", silent = true },
 }
 
 return M

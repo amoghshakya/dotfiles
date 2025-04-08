@@ -70,6 +70,12 @@ o.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 o.scrolloff = 10
 
+-- Code folding
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
@@ -82,3 +88,8 @@ o.cursorlineopt = "both"
 
 o.path:append("**")
 o.isfname:append(":")
+
+-- Neovide settings
+if g.neovide then
+  require("neovide")
+end

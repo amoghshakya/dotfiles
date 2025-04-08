@@ -3,7 +3,6 @@ return {
   event = "BufReadPost",
   opts = {
     char = "│",
-    virtcolumn = "80",
   },
   init = function()
     vim.api.nvim_create_autocmd({ "InsertEnter", "CursorMoved" }, {

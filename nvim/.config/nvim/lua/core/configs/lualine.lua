@@ -70,6 +70,11 @@ M.opts = {
     lualine_y = {},
     lualine_z = { "location" },
   },
+  extensions = {
+    "neo-tree",
+    "lazy",
+    "fzf",
+  },
 }
 
 return M

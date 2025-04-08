@@ -56,14 +56,10 @@ alias la='ls -la'
 alias ll='ls -l'
 alias tree='tree -C'
 alias hyprland='Hyprland'
+alias nvfzf='nvim $(fzf -m --preview="bat --color=always {}")'
 
 # Variables
 export EDITOR="nvim"
-
-# export FZF_DEFAULT_OPTS=" \
-# --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
-# --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-# --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
@@ -107,3 +103,5 @@ PERL5LIB="/home/am/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/am/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/am/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/am/perl5"; export PERL_MM_OPT;
+
+[ -f "/home/am/.ghcup/env" ] && . "/home/am/.ghcup/env" # ghcup-env

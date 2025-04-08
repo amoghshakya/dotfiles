@@ -63,7 +63,6 @@ M.opts = {
     Comment = { fg = "muted" },
     VertSplit = { fg = "muted", bg = "muted" },
     BufferLineFill = { bg = "base" },
-    -- BufferLineOffsetSeparator = { fg = "text", bg = "base", inherit = false },
     TelescopePromptBorder = { bg = "highlight_low" },
     TelescopePromptNormal = { bg = "highlight_low" },
     TelescopePromptTitle = { bg = "rose", fg = "base" },

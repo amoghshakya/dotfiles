@@ -25,6 +25,25 @@ M.on_attach = function(client, bufnr)
 end
 
 local make_capabilities = vim.lsp.protocol.make_client_capabilities()
+make_capabilities.textDocument.completion.completionItem = {
+  documentationFormat = { "markdown", "plaintext" },
+  deprecatedSupport = true,
+  preselectSupport = true,
+  snippetSupport = true,
+  insertReplaceSupport = true,
+  commitCharactersSupport = true,
+  labelDetailsSupport = true,
+  tagSupport = {
+    valueSet = { 1 },
+  },
+  resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  },
+}
 M.capabilities = vim.tbl_deep_extend("force", make_capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 ---@type vim.diagnostic.Opts
@@ -46,6 +65,59 @@ M.diagnostics = {
     format = function(diagnostic)
       return diagnostic.message
     end,
+  },
+}
+
+M.servers = {
+  lua_ls = {
+    settings = {
+      Lua = {
+        completion = { callSnippet = "Replace" },
+      },
+    },
+  },
+  html = {},
+  cssls = {},
+  pyright = {},
+  rust_analyzer = {},
+  ts_ls = {},
+  jsonls = {},
+  texlab = {
+    on_attach = function(client, bufnr)
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+      lsp_attach(client, bufnr)
+    end,
+  },
+  ltex_plus = {
+    on_attach = function(client, bufnr)
+      lsp_attach(client, bufnr)
+      require("ltex_extra").setup({
+        path = vim.fn.expand("~/.local/share/nvim/ltex/"),
+        load_langs = { "en-US" },
+        init_check = true,
+      })
+    end,
+    settings = {
+      ltex = {
+        language = "en-US",
+        completionEnabled = true,
+        enabled = { "latex", "tex", "markdown", "mdx" },
+        additionalRules = {
+          enablePickyRules = true,
+          motherTongue = "en-US",
+        },
+        latex = {
+          commands = {
+            ["\\caption"] = "ignore",
+          },
+        },
+        diagnosticDelay = "1000ms",
+      },
+    },
+  },
+  hls = {
+    filetypes = { "haskell" },
   },
 }
 
