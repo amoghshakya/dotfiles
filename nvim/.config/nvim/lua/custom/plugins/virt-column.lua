@@ -3,6 +3,7 @@ return {
   event = "BufReadPost",
   opts = {
     char = "│",
+    virtcolumn = "80",
   },
   init = function()
     vim.api.nvim_create_autocmd({ "InsertEnter", "CursorMoved" }, {
@@ -13,6 +14,9 @@ return {
           vim.opt_local.colorcolumn = "80"
         else
           vim.opt_local.colorcolumn = ""
+          require("virt-column").update({
+            virtcolumn = "",
+          })
         end
       end,
     })

@@ -6,7 +6,25 @@ return {
   version = "*",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+    { -- not strictly required, but recommended
+      "nvim-tree/nvim-web-devicons",
+      opts = {
+        override = {
+          js = {
+            icon = "",
+            color = "#cbcb41",
+            cterm_color = "185",
+            name = "DevIconJs",
+          },
+          ts = {
+            icon = "",
+            color = "#519aba",
+            cterm_color = "74",
+            name = "DevIconTypeScript",
+          },
+        },
+      },
+    },
     "MunifTanjim/nui.nvim",
   },
   cmd = "Neotree",
@@ -19,6 +37,9 @@ return {
       statusline = true,
     },
     default_component_configs = {
+      indent = {
+        with_expanders = true,
+      },
       git_status = {
         symbols = {
           added = "✚", -- or "✚"
@@ -41,6 +62,9 @@ return {
           ["<leader>r"] = "refresh",
           ["h"] = "toggle_hidden",
         },
+      },
+      follow_current_file = {
+        enabled = true,
       },
     },
   },

@@ -15,7 +15,9 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    event = { "LspAttach", "BufReadPre" },
     dependencies = {
+      "saghen/blink.cmp",
       {
         "williamboman/mason.nvim",
         opts = {
@@ -42,7 +44,6 @@ return {
           },
         },
       },
-      "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
       local lsp_attach = require("core.configs.lsp").on_attach

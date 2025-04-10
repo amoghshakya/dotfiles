@@ -1,7 +1,81 @@
 local M = {}
 
+M.servers = {
+  lua_ls = {
+    settings = {
+      Lua = {
+        completion = { callSnippet = "Replace" },
+      },
+    },
+  },
+  html = {},
+  cssls = {},
+  astro = {},
+  pyright = {},
+  rust_analyzer = {},
+  clangd = {},
+  ts_ls = {},
+  jsonls = {},
+  texlab = {
+    on_attach = function(client, bufnr)
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+      M.on_attach(client, bufnr)
+    end,
+  },
+  ltex_plus = {
+    on_attach = function(client, bufnr)
+      M.on_attach(client, bufnr)
+      require("ltex_extra").setup({
+        path = vim.fn.expand("~/.local/share/nvim/ltex/"),
+        load_langs = { "en-US" },
+        init_check = true,
+      })
+    end,
+    settings = {
+      ltex = {
+        language = "en-US",
+        completionEnabled = true,
+        enabled = { "latex", "tex", "markdown", "mdx" },
+        additionalRules = {
+          enablePickyRules = true,
+          motherTongue = "en-US",
+        },
+        latex = {
+          commands = {
+            ["\\caption"] = "ignore",
+            ["\\cite"] = "ignore",
+            ["\\citep"] = "ignore",
+            ["\\citet"] = "ignore",
+            ["\\cref"] = "ignore",
+            ["\\Cref"] = "ignore",
+            ["\\autoref"] = "ignore",
+            ["\\autocite"] = "ignore",
+            ["\\autocites"] = "ignore",
+            ["\\usepackage"] = "ignore",
+            ["\\usepackage*"] = "ignore",
+            ["\\documentclass"] = "ignore",
+            ["\\begin"] = "ignore",
+            ["\\end"] = "ignore",
+            ["\\newcommand"] = "ignore",
+            ["\\renewcommand"] = "ignore",
+            ["\\DeclareMathOperator"] = "ignore",
+            ["\\DeclareMathAlphabet"] = "ignore",
+            ["\\DeclareMathSymbol"] = "ignore",
+            ["\\DeclarePairedDelimiter"] = "ignore",
+          },
+        },
+        diagnosticDelay = "1000ms",
+      },
+    },
+  },
+  hls = {
+    filetypes = { "haskell" },
+  },
+}
+
 ---@type vim.lsp.client.on_attach_cb
-M.on_attach = function(client, bufnr)
+M.on_attach = function(_, bufnr)
   local map = function(keys, func, desc, mode)
     vim.keymap.set(mode or "n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
   end
@@ -44,7 +118,8 @@ make_capabilities.textDocument.completion.completionItem = {
     },
   },
 }
-M.capabilities = vim.tbl_deep_extend("force", make_capabilities, require("cmp_nvim_lsp").default_capabilities())
+
+M.capabilities = vim.tbl_deep_extend("force", make_capabilities, require("blink-cmp").get_lsp_capabilities({}, false))
 
 ---@type vim.diagnostic.Opts
 M.diagnostics = {
@@ -65,59 +140,6 @@ M.diagnostics = {
     format = function(diagnostic)
       return diagnostic.message
     end,
-  },
-}
-
-M.servers = {
-  lua_ls = {
-    settings = {
-      Lua = {
-        completion = { callSnippet = "Replace" },
-      },
-    },
-  },
-  html = {},
-  cssls = {},
-  pyright = {},
-  rust_analyzer = {},
-  ts_ls = {},
-  jsonls = {},
-  texlab = {
-    on_attach = function(client, bufnr)
-      client.server_capabilities.documentFormattingProvider = false
-      client.server_capabilities.documentRangeFormattingProvider = false
-      lsp_attach(client, bufnr)
-    end,
-  },
-  ltex_plus = {
-    on_attach = function(client, bufnr)
-      lsp_attach(client, bufnr)
-      require("ltex_extra").setup({
-        path = vim.fn.expand("~/.local/share/nvim/ltex/"),
-        load_langs = { "en-US" },
-        init_check = true,
-      })
-    end,
-    settings = {
-      ltex = {
-        language = "en-US",
-        completionEnabled = true,
-        enabled = { "latex", "tex", "markdown", "mdx" },
-        additionalRules = {
-          enablePickyRules = true,
-          motherTongue = "en-US",
-        },
-        latex = {
-          commands = {
-            ["\\caption"] = "ignore",
-          },
-        },
-        diagnosticDelay = "1000ms",
-      },
-    },
-  },
-  hls = {
-    filetypes = { "haskell" },
   },
 }
 
