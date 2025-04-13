@@ -60,6 +60,20 @@ M.opts = function()
         delay = 200,
         reveal = { "close" },
       },
+      name_formatter = function(buf)
+        local name = buf.name
+        local path = buf.path
+
+        local filename = vim.fn.fnamemodify(name, ":t")
+        local is_index = filename:match("^index%.[tj]sx?$")
+
+        if is_index then
+          local dirname = vim.fn.fnamemodify(path, ":h:t")
+          return dirname .. " - Component"
+        end
+
+        return filename
+      end,
     },
   }
 end

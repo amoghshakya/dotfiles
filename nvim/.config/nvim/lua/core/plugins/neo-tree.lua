@@ -57,6 +57,7 @@ return {
         hide_gitignored = true,
       },
       window = {
+        position = "right",
         mappings = {
           ["<C-n>"] = "close_window",
           ["<leader>r"] = "refresh",

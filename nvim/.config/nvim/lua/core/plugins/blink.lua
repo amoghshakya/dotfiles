@@ -74,6 +74,7 @@ return {
         Snippet = "",
       },
     },
+
     completion = {
       menu = {
         border = "rounded",
@@ -101,12 +102,21 @@ return {
         },
       },
     },
+
+    sources = {
+      default = { "lsp", "path", "snippets", "lazydev" },
+      providers = {
+        lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
+      },
+    },
+
     signature = {
       enabled = true,
       window = {
         border = "rounded",
       },
     },
+
     fuzzy = { implementation = "prefer_rust" },
     cmdline = {
       enabled = false,

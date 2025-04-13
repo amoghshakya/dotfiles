@@ -57,6 +57,7 @@ alias ll='ls -l'
 alias tree='tree -C'
 alias hyprland='Hyprland'
 alias nvfzf='nvim $(fzf -m --preview="bat --color=always {}")'
+alias lg='lazygit'
 
 # Variables
 export EDITOR="nvim"

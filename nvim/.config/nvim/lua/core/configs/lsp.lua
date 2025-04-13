@@ -75,7 +75,11 @@ M.servers = {
 }
 
 ---@type vim.lsp.client.on_attach_cb
-M.on_attach = function(_, bufnr)
+M.on_attach = function(client, bufnr)
+  if client.server_capabilities.semanticTokensProvider then
+    vim.lsp.semantic_tokens.start(bufnr, client.id)
+  end
+
   local map = function(keys, func, desc, mode)
     vim.keymap.set(mode or "n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
   end

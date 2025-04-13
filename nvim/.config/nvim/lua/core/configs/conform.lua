@@ -9,9 +9,12 @@ local opts = {
   formatters_by_ft = {
     lua = { "stylua" },
     css = { "prettier" },
+    scss = { "prettier" },
     html = { "prettier" },
     javascript = { "prettier", "prettierd", stop_after_first = true },
+    javascriptreact = { "prettier", "prettierd", stop_after_first = true },
     typescript = { "prettier", "prettierd", stop_after_first = true },
+    typescriptreact = { "prettier", "prettierd", stop_after_first = true },
     json = { "prettier" },
     jsonc = { "prettier" },
     python = { "autopep8", "isort" },

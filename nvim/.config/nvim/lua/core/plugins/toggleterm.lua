@@ -27,7 +27,7 @@ return {
   },
   keys = {
     {
-      "<A-h>",
+      "<A-`>",
       "<Cmd>ToggleTerm direction=horizontal<CR>",
       mode = { "n", "t" },
       desc = "Toggle horizontal terminal",

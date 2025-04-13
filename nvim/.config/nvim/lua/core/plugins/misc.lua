@@ -1,4 +1,8 @@
 return {
+  {
+    "andymass/vim-matchup",
+    event = "VeryLazy",
+  },
   "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
   { -- Autoformat
     "stevearc/conform.nvim",

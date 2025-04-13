@@ -1,0 +1,167 @@
+@use "../themes/_rosepine.scss" as *;
+@use "../_globals.scss" as *;
+@use "sass:color";
+
+$accent: $foam;
+
+window.Bar {
+  background-color: $base;
+  // border-radius: $radius_pill;
+  // border: 1px solid $accent;
+  padding: 0;
+  box-shadow: none;
+  color: $text;
+  font-size: 1.1em;
+  font-weight: bold;
+
+  label {
+    margin: 0 8px;
+  }
+
+  .Workspaces {
+    border-radius: $radius_pill;
+    padding: 8px 10px;
+
+    &:hover {
+      background-color: $overlay;
+    }
+
+    button {
+      all: unset;
+      background-color: transparent;
+
+      &:hover label {
+        background-color: color.adjust($accent, $alpha: -0.1);
+        border-color: color.adjust($accent, $alpha: -0.8);
+      }
+
+      &:active label {
+        background-color: color.adjust($text, $alpha: -0.8);
+      }
+    }
+
+    label {
+      font-size: 0px;
+      transition: $transition;
+      padding: 2px;
+      margin: 2px;
+      border-radius: $radius_circle;
+      border: 1px solid transparent;
+      background-color: $highlight-high;
+    }
+
+    .focused label {
+      border-radius: $radius;
+      padding-right: 18px;
+      background-color: $accent;
+      color: $accent;
+      border-color: $accent;
+    }
+  }
+
+  .Time {
+    font-size: 0.9em;
+    padding: 0 10px;
+
+    &:hover {
+      background-color: $overlay;
+      border-radius: $radius_pill;
+    }
+  }
+
+  .Wifi {
+    padding: 0 10px;
+    font-size: 0.9em;
+
+    &:hover {
+      background-color: $overlay;
+      border-radius: $radius_pill;
+    }
+
+    label {
+      margin-left: 0;
+      padding-left: 0;
+    }
+  }
+
+  .Media {
+    padding: 0 10px;
+    font-size: 0.9em;
+
+    &:hover {
+      background-color: $overlay;
+      border-radius: $radius_pill;
+    }
+
+    label {
+      margin-left: 0;
+      padding-left: 0;
+    }
+  }
+
+  .SysTray {
+    margin-right: 8px;
+
+    button {
+      all: unset;
+      background-color: transparent;
+      padding: 0px 4px;
+      border-radius: $radius_pill;
+
+      &:hover {
+        background-color: $overlay;
+      }
+    }
+  }
+
+  .Focused {
+    font-size: 12px;
+    color: $accent;
+  }
+
+  .Media .Cover {
+    min-height: 1.2em;
+    min-width: 1.2em;
+    border-radius: $radius;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .Battery label {
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  .AudioSlider {
+    * {
+      all: unset;
+    }
+
+    icon {
+      margin-right: 0.6em;
+    }
+
+    & {
+      margin: 0 1em;
+    }
+
+    trough {
+      background-color: color.adjust($text, $alpha: -0.8);
+      border-radius: $radius;
+    }
+
+    highlight {
+      background-color: $accent;
+      min-height: 0.8em;
+      border-radius: $radius;
+    }
+
+    slider {
+      background-color: $text;
+      border-radius: $radius;
+      min-height: 1em;
+      min-width: 1em;
+      margin: -0.2em;
+    }
+  }
+}
