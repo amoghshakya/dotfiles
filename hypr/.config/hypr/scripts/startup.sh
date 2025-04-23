@@ -8,7 +8,3 @@ exec easyeffects --gapplication-service > /dev/null 2>&1 &
 
 # Network Manager applet
 # nm-applet --indicator &
-
-# eww
-eww daemon &&
-eww open-many bar control-center

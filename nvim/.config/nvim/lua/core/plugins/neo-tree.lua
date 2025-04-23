@@ -32,9 +32,12 @@ return {
     { "<C-n>", ":Neotree toggle<CR>", desc = "NeoTree toggle", silent = true },
     { "<Leader>e", ":Neotree focus<CR>", desc = "NeoTree focus", silent = true },
   },
+  ---@module "neo-tree"
+  ---@type neotree.Config?
   opts = {
     source_selector = {
       statusline = true,
+      truncation_character = "...",
     },
     default_component_configs = {
       indent = {
@@ -57,7 +60,6 @@ return {
         hide_gitignored = true,
       },
       window = {
-        position = "right",
         mappings = {
           ["<C-n>"] = "close_window",
           ["<leader>r"] = "refresh",

@@ -45,8 +45,9 @@ M.opts = {
     lualine_x = {
       {
         "lsp_status",
+        icon = "",
         symbols = {
-          separator = " ~ ",
+          separator = "  ",
         },
       },
       {

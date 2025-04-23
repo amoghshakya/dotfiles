@@ -1,33 +1,33 @@
-@use "../themes/_rosepine.scss" as *;
-@use "../_globals.scss" as *;
 @use "sass:color";
-
-$accent: $foam;
+@use "../_globals.scss" as *;
 
 window.Bar {
   background-color: $base;
   // border-radius: $radius_pill;
   // border: 1px solid $accent;
   padding: 0;
-  box-shadow: none;
+  margin: 0;
   color: $text;
-  font-size: 1.1em;
-  font-weight: bold;
+  font-size: 1em;
+  font-weight: 600;
 
   label {
     margin: 0 8px;
   }
 
-  .Workspaces {
+  box > box > * {
     border-radius: $radius_pill;
-    padding: 8px 10px;
-
     &:hover {
+      transition: $transition;
       background-color: $overlay;
     }
+  }
+
+  .Workspaces {
+    border-radius: $radius_pill;
+    padding: 8px;
 
     button {
-      all: unset;
       background-color: transparent;
 
       &:hover label {
@@ -45,14 +45,14 @@ window.Bar {
       transition: $transition;
       padding: 2px;
       margin: 2px;
-      border-radius: $radius_circle;
+      border-radius: 100%;
       border: 1px solid transparent;
       background-color: $highlight-high;
     }
 
     .focused label {
-      border-radius: $radius;
-      padding-right: 18px;
+      border-radius: $radius_pill;
+      min-width: 18px;
       background-color: $accent;
       color: $accent;
       border-color: $accent;
@@ -60,8 +60,8 @@ window.Bar {
   }
 
   .Time {
+    padding: 0 6px;
     font-size: 0.9em;
-    padding: 0 10px;
 
     &:hover {
       background-color: $overlay;
@@ -70,13 +70,7 @@ window.Bar {
   }
 
   .Wifi {
-    padding: 0 10px;
     font-size: 0.9em;
-
-    &:hover {
-      background-color: $overlay;
-      border-radius: $radius_pill;
-    }
 
     label {
       margin-left: 0;
@@ -85,28 +79,45 @@ window.Bar {
   }
 
   .Media {
-    padding: 0 10px;
+    padding: 0;
     font-size: 0.9em;
-
-    &:hover {
-      background-color: $overlay;
-      border-radius: $radius_pill;
-    }
 
     label {
       margin-left: 0;
       padding-left: 0;
     }
+
+    .Toggle {
+      border-radius: $radius_pill;
+      &:hover {
+        background-color: $overlay;
+      }
+
+      box {
+        padding: 0 10px;
+      }
+    }
+
+    .Paused {
+      label {
+        color: $muted;
+      }
+    }
   }
 
-  .SysTray {
-    margin-right: 8px;
+  .System {
+    padding: 0 4px;
+    border-radius: $radius_pill;
+    &:hover {
+      background-color: $overlay;
+    }
+  }
 
+  .AppIndicator {
+    padding: 2px 8px;
     button {
-      all: unset;
       background-color: transparent;
-      padding: 0px 4px;
-      border-radius: $radius_pill;
+      border-radius: 100%;
 
       &:hover {
         background-color: $overlay;
@@ -114,54 +125,26 @@ window.Bar {
     }
   }
 
+  .Battery {
+    label {
+      font-size: 1.1rem;
+    }
+
+    label.low-battery {
+      color: color.adjust($rose, $alpha: -0.2);
+    }
+  }
+
+  .Notifications {
+    padding: 0 10px;
+    &:hover {
+      background-color: $overlay;
+      border-radius: $radius_pill;
+    }
+  }
+
   .Focused {
     font-size: 12px;
     color: $accent;
-  }
-
-  .Media .Cover {
-    min-height: 1.2em;
-    min-width: 1.2em;
-    border-radius: $radius;
-    background-position: center;
-    background-size: contain;
-  }
-
-  .Battery label {
-    padding-left: 0;
-    margin-left: 0;
-  }
-
-  .AudioSlider {
-    * {
-      all: unset;
-    }
-
-    icon {
-      margin-right: 0.6em;
-    }
-
-    & {
-      margin: 0 1em;
-    }
-
-    trough {
-      background-color: color.adjust($text, $alpha: -0.8);
-      border-radius: $radius;
-    }
-
-    highlight {
-      background-color: $accent;
-      min-height: 0.8em;
-      border-radius: $radius;
-    }
-
-    slider {
-      background-color: $text;
-      border-radius: $radius;
-      min-height: 1em;
-      min-width: 1em;
-      margin: -0.2em;
-    }
   }
 }

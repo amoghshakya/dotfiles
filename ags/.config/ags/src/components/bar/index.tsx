@@ -1,6 +1,6 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk4";
-import { Variable } from "astal";
-import { Workspaces, DateTime, SysTray, Connection, Media } from "./modules";
+import { Workspaces, DateTime, SysTray, Media, Notifications } from "./modules";
+import VolumeControl from "../control_center/modules/volume";
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
@@ -15,16 +15,16 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       application={App}
     >
       <centerbox>
-        <box hexpand halign={Gtk.Align.START}>
+        <box halign={Gtk.Align.START}>
           <Workspaces />
-          <Media />
         </box>
         <box hexpand halign={Gtk.Align.CENTER}>
-          <DateTime />
+          <Media />
         </box>
-        <box hexpand halign={Gtk.Align.END}>
-          {/* <SysTray /> */}
-          <Connection />
+        <box halign={Gtk.Align.END} spacing={0}>
+          <SysTray />
+          <DateTime />
+          <Notifications />
         </box>
       </centerbox>
     </window>

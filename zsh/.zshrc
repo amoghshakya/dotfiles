@@ -106,3 +106,11 @@ PERL_MB_OPT="--install_base \"/home/am/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/am/perl5"; export PERL_MM_OPT;
 
 [ -f "/home/am/.ghcup/env" ] && . "/home/am/.ghcup/env" # ghcup-env
+
+# pnpm
+export PNPM_HOME="/home/am/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

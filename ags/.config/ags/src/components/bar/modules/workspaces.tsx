@@ -59,12 +59,6 @@ export default function Workspaces() {
         // gna show empty workspaces as well
         const range = Array.from({ length: maxId }, (_, i) => i + 1); // 1 to max
 
-        // GNOME like workspace indicator (an extra indicator)
-        // const range = Array.from(
-        //   { length: maxId < 10 ? maxId + 1 : maxId },
-        //   (_, i) => i + 1,
-        // ); // 1 to max + 1
-
         return range.map((id) => {
           const ws = valid.find((w) => w.id === id);
           if (id > maxId) return;
@@ -72,7 +66,12 @@ export default function Workspaces() {
             fw.id === id ? ["focused"] : [""],
           );
           return (
-            <button cssClasses={css} onClicked={() => ws?.focus?.()}>
+            <button
+              cssClasses={css}
+              onClicked={() => {
+                ws?.focus();
+              }}
+            >
               {" "}
             </button>
           );

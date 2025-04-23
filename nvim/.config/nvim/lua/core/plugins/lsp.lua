@@ -84,7 +84,8 @@ return {
         "stylua",
       })
 
-      require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+      require("mason-tool-installer").setup({ ensure_installed = ensure_installed, 
+      auto_update = true })
 
       require("mason-lspconfig").setup({
         ensure_installed = {},
@@ -99,5 +100,37 @@ return {
 
       vim.diagnostic.config(require("core.configs.lsp").diagnostics)
     end,
+  },
+  {
+    "Bekaboo/dropbar.nvim",
+    event = { "LspAttach" },
+    -- optional, but required for fuzzy finder support
+    dependencies = {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+    },
+    keys = {
+      {
+        "<Leader>;",
+        function()
+          require("dropbar.api").pick()
+        end,
+        desc = "Pick symbols in winbar",
+      },
+      {
+        "[;",
+        function()
+          require("dropbar.api").goto_context_start()
+        end,
+        desc = "Go to start of current context",
+      },
+      {
+        "];",
+        function()
+          require("dropbar.api").select_next_context()
+        end,
+        desc = "Select next context",
+      },
+    },
   },
 }

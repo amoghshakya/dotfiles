@@ -7,6 +7,8 @@ export default function DateTime({ format = "%b %e\t %I:%M %p" }) {
   );
 
   return (
-    <label cssClasses={["Time"]} onDestroy={() => time.drop()} label={time()} />
+    <box cssClasses={["Time"]}>
+      <label onDestroy={() => time.drop()} label={time()} />
+    </box>
   );
 }

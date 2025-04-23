@@ -1,5 +1,6 @@
 return { -- Fuzzy Finder (files, lsp, etc)
   "nvim-telescope/telescope.nvim",
+  event = "VeryLazy",
   cmd = { "Telescope" },
   -- branch = "0.1.x",
   dependencies = {
@@ -30,7 +31,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
           n = { ["q"] = require("telescope.actions").close },
         },
         winblend = 0,
-        borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+        -- borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
         border = true,
         prompt_prefix = "   ",
         selection_caret = " ",
@@ -46,6 +47,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
         },
         layout_strategy = "horizontal",
         color_devicons = true,
+        results_title = false,
       },
       pickers = {},
       extensions = {

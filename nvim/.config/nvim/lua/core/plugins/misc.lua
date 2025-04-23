@@ -1,7 +1,11 @@
 return {
   {
     "andymass/vim-matchup",
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      vim.g.matchup_matchparen_deferred = 1
+      vim.g.matchup_matchparen_offscreen = {}
+    end,
   },
   "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
   { -- Autoformat
@@ -40,6 +44,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
+    event = "UIEnter",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = require("core.configs.lualine").opts,
   },

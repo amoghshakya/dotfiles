@@ -8,9 +8,12 @@ M.servers = {
       },
     },
   },
+  bashls = {},
   html = {},
   cssls = {},
   astro = {},
+  tailwindcss = {},
+  emmet_language_server = {},
   pyright = {},
   rust_analyzer = {},
   clangd = {},
@@ -76,9 +79,8 @@ M.servers = {
 
 ---@type vim.lsp.client.on_attach_cb
 M.on_attach = function(client, bufnr)
-  if client.server_capabilities.semanticTokensProvider then
-    vim.lsp.semantic_tokens.start(bufnr, client.id)
-  end
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.documentRangeFormattingProvider = false
 
   local map = function(keys, func, desc, mode)
     vim.keymap.set(mode or "n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
@@ -93,6 +95,16 @@ M.on_attach = function(client, bufnr)
   map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
   map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
   map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+  vim.keymap.set("n", "K", function()
+    vim.lsp.buf.hover({
+      border = "rounded",
+      focusable = false,
+    })
+  end, {
+    desc = "Show hover information",
+    remap = true,
+    silent = true,
+  })
 
   -- Inlay Hints toggle
   if vim.lsp.inlay_hint then

@@ -1,4 +1,39 @@
+@forward "themes/rosepine";
+@use "themes/rosepine" as *;
+
+$accent: $iris;
 $radius: 8px;
 $radius_pill: 25px;
 $radius_circle: 50%;
-$transition: all 0.2s ease 0.1s;
+$transition: all 0.1s ease-in-out 0.2s;
+
+button,
+label,
+box {
+  all: unset;
+}
+
+.icon {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 1.3rem;
+}
+
+trough {
+  background-color: $overlay;
+  border-radius: $radius;
+}
+
+highlight {
+  background-color: $accent;
+  min-height: 0.1em;
+  border-radius: $radius;
+}
+
+slider {
+  background-color: $text;
+  box-shadow: 0 0 0 0 $base;
+  border-radius: $radius_circle;
+  min-height: 0.9em;
+  min-width: 0.9em;
+  margin: -0.3em;
+}

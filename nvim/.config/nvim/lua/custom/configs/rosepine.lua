@@ -62,12 +62,12 @@ M.opts = {
   highlight_groups = {
     Comment = { fg = "muted" },
     VertSplit = { fg = "muted", bg = "muted" },
-    BufferLineFill = { bg = "base" },
-    TelescopePromptBorder = { bg = "highlight_low" },
-    TelescopePromptNormal = { bg = "highlight_low" },
-    TelescopePromptTitle = { bg = "rose", fg = "base" },
-    TelescopeMatching = { fg = "subtle" },
-    TelescopePreviewTitle = { bg = "love", fg = "base" },
+    BufferLineFill = { bg = "surface" },
+    -- TelescopePromptBorder = { bg = "overlay" },
+    -- TelescopePromptNormal = { bg = "overlay" },
+    -- TelescopePromptTitle = { bg = "iris", fg = "base" },
+    -- TelescopeMatching = { fg = "subtle" },
+    -- TelescopePreviewTitle = { bg = "love", fg = "base" },
   },
 
   before_highlight = function(group, highlight, palette)

@@ -88,6 +88,7 @@ return {
       },
       trigger = {
         show_on_trigger_character = true,
+        show_on_blocked_trigger_characters = { "{", "\n", "\t" },
       },
       documentation = { auto_show = false },
       list = {

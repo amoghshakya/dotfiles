@@ -11,7 +11,7 @@ return {
       sass = {
         enabled = true,
       },
-      mode = "virtualtext",
+      -- mode = "virtualtext",
       virtualtext = "",
       virtualtext_inline = "before",
     },

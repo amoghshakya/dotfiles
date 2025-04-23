@@ -47,14 +47,3 @@ map("n", "<2-LeftMouse>", "gf", { noremap = true, silent = true })
 -- Buffers
 map("n", "<leader>n", "<Cmd>enew<CR>", { desc = "New empty buffer", silent = true })
 map("n", "<leader>x", "<Cmd>bdelete<CR>", { desc = "Close buffer", silent = true })
-
-map("n", "K", function()
-  vim.lsp.buf.hover({
-    border = "rounded",
-    focusable = false,
-  })
-end, {
-  desc = "Show hover information",
-  remap = true,
-  silent = true,
-})

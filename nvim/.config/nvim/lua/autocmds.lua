@@ -21,3 +21,14 @@ autocmd("FileType", {
     vim.keymap.set("n", "q", "<cmd>bd<CR>", { silent = true, buffer = true })
   end,
 })
+
+-- Kitty padding
+autocmd("VimEnter", {
+  desc = "Remove kitty padding on startup",
+  command = ":silent !kitty @ set-spacing padding=0 margin=0",
+})
+
+autocmd("VimLeavePre", {
+  desc = "Remove kitty padding on startup",
+  command = ":silent !kitty @ set-spacing padding=4 margin=0",
+})
