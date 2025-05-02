@@ -1,3 +1,8 @@
+--[[
+-- https://github.com/mrjones2014/smart-splits.nvim
+-- Intuitive window resizing and splits for Neovim
+--]]
+
 return {
   "mrjones2014/smart-splits.nvim",
   event = "VeryLazy",

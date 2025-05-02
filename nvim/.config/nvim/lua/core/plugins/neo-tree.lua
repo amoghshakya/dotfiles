@@ -64,6 +64,7 @@ return {
           ["<C-n>"] = "close_window",
           ["<leader>r"] = "refresh",
           ["h"] = "toggle_hidden",
+          ["w"] = "open",
         },
       },
       follow_current_file = {

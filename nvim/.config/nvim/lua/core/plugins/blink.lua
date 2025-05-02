@@ -1,3 +1,8 @@
+--[[
+-- blink.cmp
+-- A completion engine for Neovim that provides a fast and flexible way to complete code.
+--]]
+
 return {
   "saghen/blink.cmp",
   event = { "InsertEnter" },
@@ -87,17 +92,29 @@ return {
         },
       },
       trigger = {
-        show_on_trigger_character = true,
-        show_on_blocked_trigger_characters = { "{", "\n", "\t" },
+        show_on_trigger_character = false,
+        show_on_blocked_trigger_characters = { "{", "\n", "\t", ">", " " },
       },
-      documentation = { auto_show = false },
+      documentation = {
+        -- Show documentation beside the completion menu
+        -- Really helpful for seeing what you're completing
+        auto_show = true,
+        window = {
+          border = "rounded",
+        },
+      },
       list = {
         selection = {
+          -- Preselect the first item in the list
           preselect = true,
+          -- I like to insert on accept but not on select
+          -- It's kind of annoying when you have to edit what you're typing
+          -- but auto complete just updates what you were typing.
           auto_insert = false,
         },
       },
       accept = {
+        -- Add brackets (if it's a function or method) on accepting completion
         auto_brackets = {
           enabled = true,
         },
@@ -119,6 +136,9 @@ return {
     },
 
     fuzzy = { implementation = "prefer_rust" },
+
+    -- Disable blink for commandline
+    -- Fuzzy searching is nice but it's annoying on commandline
     cmdline = {
       enabled = false,
     },

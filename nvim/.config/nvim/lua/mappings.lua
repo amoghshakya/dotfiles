@@ -10,6 +10,18 @@ map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- Diagnostic keymaps
 map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
+-- Rounded borders for LSP Hovers
+vim.keymap.set("n", "K", function()
+  vim.lsp.buf.hover({
+    border = "rounded",
+    focusable = false,
+  })
+end, {
+  desc = "Show hover information",
+  remap = true,
+  silent = true,
+})
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -42,8 +54,20 @@ map("i", "<C-s>", "<cmd>write<CR>", { desc = "Save current file" })
 map("n", "<C-/>", "gcc", { desc = "Toggle comment", remap = true })
 map("v", "<C-/>", "gc", { desc = "Toggle comment", remap = true })
 
+-- Weird stuff
 map("n", "<2-LeftMouse>", "gf", { noremap = true, silent = true })
 
 -- Buffers
 map("n", "<leader>n", "<Cmd>enew<CR>", { desc = "New empty buffer", silent = true })
 map("n", "<leader>x", "<Cmd>bdelete<CR>", { desc = "Close buffer", silent = true })
+
+-- Toggle numberlines
+map("n", "<leader>tn", function()
+  if vim.wo.number then
+    vim.wo.number = false
+    vim.wo.relativenumber = false
+  else
+    vim.wo.number = true
+    vim.wo.relativenumber = true
+  end
+end, { desc = "Toggle number lines", silent = true })

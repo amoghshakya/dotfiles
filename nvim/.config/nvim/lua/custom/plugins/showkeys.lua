@@ -1,3 +1,8 @@
+--[[
+-- Just a simple plugin to show the keys you are pressing
+-- This plugin is useful for debugging key mappings and understanding how they work in Neovim.
+--]]
+
 return {
   "nvzone/showkeys",
   cmd = "ShowkeysToggle",

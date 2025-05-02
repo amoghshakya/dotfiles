@@ -1,12 +1,14 @@
+--[[
+-- https://github.com/folke/snacks.nvim
+-- A collection of QoL plugins for Neovim (Thank you folke!)
+--]]
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
   ---@type snacks.Config
   opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
     bigfile = { enabled = true },
     dashboard = require("core.configs.snacks").dashboard,
     indent = {
@@ -15,6 +17,7 @@ return {
         easing = "cubic-in-out",
       },
     },
+    image = { enabled = true },
     input = { enabled = true },
     lazygit = {
       enabled = true,
@@ -22,19 +25,13 @@ return {
     notifier = {
       enabled = true,
     },
-    picker = {
-      enabled = true,
-      layout = {
-        cycle = false,
-      },
-    },
+    picker = require("core.configs.snacks").picker,
     quickfile = {
       enabled = true,
       exclude = { "latex" },
     },
     scope = { enabled = true },
     statuscolumn = { enabled = true },
-    terminal = require("core.configs.snacks").terminal,
     toggle = {
       enabled = true,
     },

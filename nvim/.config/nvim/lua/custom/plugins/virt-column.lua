@@ -1,3 +1,8 @@
+--[[
+-- This plugin provides a visual column to indicate the maximum line length in code files.
+-- Useful for maintaining code style and readability escpecially in Python, Lua, and LaTeX files.
+--]]
+
 return {
   "lukas-reineke/virt-column.nvim",
   event = "BufReadPost",

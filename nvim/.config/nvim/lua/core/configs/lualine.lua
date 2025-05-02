@@ -4,6 +4,7 @@ local excluded_filetypes = {
   "TelescopePrompt",
   "toggleterm",
   "snacks_dashboard",
+  "snacks_picker_input",
   "neo-tree",
 }
 
@@ -55,11 +56,17 @@ M.opts = {
         cond = exclude,
       },
     },
-    lualine_y = {},
+    lualine_y = {
+      {
+        "progress",
+        cond = exclude,
+      },
+    },
     lualine_z = {
       {
         "location",
         icon = "",
+        cond = exclude,
       },
     },
   },

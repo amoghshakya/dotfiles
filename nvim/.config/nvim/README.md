@@ -13,20 +13,20 @@ like color schemes and other language specific plugins.
 ```sh
 .
 ├── after
-│   └── ftplugin
-│       ├── (filetype).lua
+│   └── ftplugin
+│       └── (filetype).lua
 ├── lua
-│   ├── core
-│   │   ├── configs/
-│   │   └── plugins/
-│   ├── custom
-│   │   ├── configs/
-│   │   └── plugins/
-│   ├── ascii.lua
-│   ├── autocmds.lua
-│   ├── mappings.lua
-│   ├── neovide.lua
-│   └── options.lua
+│   ├── core
+│   │   ├── configs/
+│   │   └── plugins/
+│   ├── custom
+│   │   ├── configs/
+│   │   └── plugins/
+│   ├── ascii.lua
+│   ├── autocmds.lua
+│   ├── mappings.lua
+│   ├── neovide.lua
+│   └── options.lua
 ├── init.lua
 ```
 

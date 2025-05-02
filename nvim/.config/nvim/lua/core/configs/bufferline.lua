@@ -37,6 +37,11 @@ M.opts = function()
           separator = false,
         },
         {
+          filetype = "snacks_picker_list",
+          text = "",
+          separator = true,
+        },
+        {
           filetype = "toggleterm",
           text = "",
           separator = false,

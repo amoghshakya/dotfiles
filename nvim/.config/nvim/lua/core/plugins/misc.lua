@@ -1,5 +1,9 @@
+--[[
+-- Some useful plugins that don't fit into any specific category
+--]]
+
 return {
-  {
+  { -- % Matching
     "andymass/vim-matchup",
     event = { "BufReadPost", "BufNewFile" },
     config = function()
@@ -7,7 +11,10 @@ return {
       vim.g.matchup_matchparen_offscreen = {}
     end,
   },
-  "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+  { -- Detect tabstop and shiftwidth automatically
+    "tpope/vim-sleuth",
+    event = { "BufReadPost", "BufNewFile" },
+  },
   { -- Autoformat
     "stevearc/conform.nvim",
     event = "BufWritePre",
@@ -23,14 +30,18 @@ return {
     },
     opts = require("core.configs.conform"),
   },
-  -- Highlight todo, notes, etc in comments
-  {
+  { -- Highlight todo, notes, etc in comments
     "folke/todo-comments.nvim",
     event = "VimEnter",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = { signs = false },
   },
   {
+    -- Allows you to add, change, and delete surrounding pairs
+    -- motions like `cs"'` or `ds"` to change or delete surrounding quotes
+    -- `ysiw"` to add surrounding quotes
+    -- Also supports HTML tags, and other pairs
+    -- https://github.com/kylechui/nvim-surround
     "kylechui/nvim-surround",
     event = "VeryLazy",
     opts = {},
@@ -38,11 +49,11 @@ return {
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    opts = {},
     -- Optional dependency
     dependencies = { "saghen/blink.cmp" },
+    opts = {},
   },
-  {
+  { -- Fast status line
     "nvim-lualine/lualine.nvim",
     event = "UIEnter",
     dependencies = { "nvim-tree/nvim-web-devicons" },

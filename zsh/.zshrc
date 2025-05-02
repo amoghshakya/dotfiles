@@ -51,7 +51,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls='ls --color=auto'
+alias ls='exa -h --icons --git --color=auto --hyperlink'
 alias la='ls -la'
 alias ll='ls -l'
 alias tree='tree -C'

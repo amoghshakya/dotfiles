@@ -10,12 +10,13 @@ return {
       library = {
         -- Load luvit types when the `vim.uv` word is found
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        { path = "snacks.nvim", words = { "Snacks" } },
       },
     },
   },
   {
     "neovim/nvim-lspconfig",
-    event = { "LspAttach", "BufReadPre" },
+    event = "VeryLazy",
     dependencies = {
       "saghen/blink.cmp",
       {
@@ -84,18 +85,19 @@ return {
         "stylua",
       })
 
-      require("mason-tool-installer").setup({ ensure_installed = ensure_installed, 
-      auto_update = true })
+      require("mason-tool-installer").setup({ ensure_installed = ensure_installed, auto_update = true })
 
       require("mason-lspconfig").setup({
         ensure_installed = {},
         automatic_installation = false,
       })
 
-      for server_name, server in pairs(servers) do
-        server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-        server.on_attach = server.on_attach or lsp_attach
-        require("lspconfig")[server_name].setup(server)
+      for server, config in pairs(servers) do
+        config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, config.capabilities or {})
+        config.on_attach = config.on_attach or lsp_attach
+        vim.lsp.config(server, config)
+        vim.lsp.enable(server)
+        -- require("lspconfig")[server].setup(config)
       end
 
       vim.diagnostic.config(require("core.configs.lsp").diagnostics)
@@ -105,10 +107,10 @@ return {
     "Bekaboo/dropbar.nvim",
     event = { "LspAttach" },
     -- optional, but required for fuzzy finder support
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-    },
+    -- dependencies = {
+    --   "nvim-telescope/telescope-fzf-native.nvim",
+    --   build = "make",
+    -- },
     keys = {
       {
         "<Leader>;",

@@ -27,6 +27,7 @@ return { -- Highlight, edit, and navigate code
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
+      ignore_install = { "latex" },
       highlight = {
         enable = true,
         disable = {},
@@ -34,8 +35,7 @@ return { -- Highlight, edit, and navigate code
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        -- additional_vim_regex_highlighting = { "ruby" },
-        additional_vim_regex_highlighting = false,
+        additional_vim_regex_highlighting = { "ruby" },
       },
       indent = { enable = true, disable = { "ruby" } },
       -- matchup integration
@@ -62,20 +62,5 @@ return { -- Highlight, edit, and navigate code
       mode = "cursor",
       max_lines = 5,
     },
-  },
-  {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    event = "VeryLazy",
-    config = function()
-      vim.g.skip_ts_context_commentstring_module = true
-      local get_option = vim.filetype.get_option
-      vim.filetype.get_option = function(filetype, option)
-        return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
-          or get_option(filetype, option)
-      end
-      require("ts_context_commentstring").setup({
-        enable_autocmd = false,
-      })
-    end,
   },
 }

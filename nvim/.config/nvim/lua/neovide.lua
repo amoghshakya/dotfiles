@@ -1,5 +1,4 @@
 vim.o.guifont = "JetBrainsMono Nerd Font:h10"
-vim.opt.linespace = 4
 vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_detach_on_quit = "prompt"
 -- vim.g.neovide_fullscreen = true
