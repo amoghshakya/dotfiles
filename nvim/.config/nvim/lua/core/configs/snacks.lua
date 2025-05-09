@@ -140,11 +140,12 @@ M.keys = {
         layout = "vertical",
       })
     end,
-    desc = "[S]earch [G]it [L]ogs",
+    desc = "[G]it [L]ogs",
   },
   {
     "<leader>ft",
     function()
+      -- This is a custom picker defined in the config below
       Snacks.picker.filetypes()
     end,
     desc = "[F]ile[t]ypes",
@@ -275,7 +276,7 @@ M.picker = {
 M.dashboard = {
   enabled = true,
   preset = {
-    header = table.concat(require("ascii").hydra, "\n"),
+    header = table.concat(require("ascii").sharp, "\n"),
   },
 }
 

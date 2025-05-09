@@ -57,7 +57,9 @@ return {
 
       local ensure_installed = {}
 
-      local lspconfig_to_package = require("mason-lspconfig.mappings.server").lspconfig_to_package
+      local mlsp = require("mason-lspconfig")
+      local lspconfig_to_package = mlsp.get_mappings().lspconfig_to_package
+
       for server, _ in pairs(servers) do
         local mason_name = lspconfig_to_package[server]
         if mason_name then
@@ -106,11 +108,6 @@ return {
   {
     "Bekaboo/dropbar.nvim",
     event = { "LspAttach" },
-    -- optional, but required for fuzzy finder support
-    -- dependencies = {
-    --   "nvim-telescope/telescope-fzf-native.nvim",
-    --   build = "make",
-    -- },
     keys = {
       {
         "<Leader>;",

@@ -5,7 +5,19 @@
 
 return {
   "catgoose/nvim-colorizer.lua",
-  event = "BufReadPre",
+  -- Only start the plugin if the filetype is one of the following
+  ft = { -- Get rid of this if you want to see colors in all filetypes
+    "css",
+    "scss",
+    "less",
+    "html",
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact",
+    "vue",
+    "svelte",
+  },
   opts = {
     user_default_options = {
       css = true,
@@ -16,8 +28,7 @@ return {
       sass = {
         enabled = true,
       },
-      -- For VSCode-like color preview
-      -- mode = "virtualtext",
+      -- mode = "virtualtext", -- For VSCode-like color preview
       virtualtext = "",
       virtualtext_inline = "before",
     },

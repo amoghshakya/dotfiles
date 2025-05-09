@@ -1,6 +1,7 @@
 --[[
 -- Just a simple plugin to show the keys you are pressing
--- This plugin is useful for debugging key mappings and understanding how they work in Neovim.
+-- I just have it for fun, but it's useful to see how inefficient 
+-- I can be when using vim.
 --]]
 
 return {
@@ -25,6 +26,6 @@ return {
     },
   },
   keys = {
-    { "<leader>kys", "<cmd>ShowkeysToggle<CR>", desc = "Showkeys Toggle" },
+    { "<leader>tk", "<cmd>ShowkeysToggle<CR>", desc = "Toggle Showkeys" },
   },
 }

@@ -19,6 +19,7 @@ local opts = {
     python = { "autopep8", "isort" },
     c = { "clang-format" },
     cpp = { "clang-format" },
+    rust = { "rustfmt" },
     tex = { "latexindent" },
     plaintex = { "latexindent" },
     bib = { "bibtex-tidy" },

@@ -26,6 +26,7 @@ return {
       height = 30,
       width = 100,
     },
+    autochdir = true, -- when neovim changes it current directory the terminal will change it's own when next it's opened
   },
   keys = require("core.configs.toggleterm").keys,
 }

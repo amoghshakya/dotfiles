@@ -10,6 +10,7 @@
   },
   "display": {
     "separator": " ",
+    "brightColor": true,
   },
   "modules": [
     "break",
@@ -37,7 +38,7 @@
     },
     {
       "type": "shell",
-      "key": " ",
+      "key": " ",
       "keyColor": "33",
     },
     {
