@@ -95,6 +95,7 @@ M.keys = {
     "<leader>sp",
     function()
       Snacks.picker.zoxide({
+        title = "Projects",
         layout = {
           preset = "vscode",
         },

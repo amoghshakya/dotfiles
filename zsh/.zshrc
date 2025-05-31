@@ -1,5 +1,3 @@
-fastfetch
-
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -17,12 +15,13 @@ source "${ZINIT_HOME}/zinit.zsh"
 eval "$(starship init zsh)"
 
 # Add in zsh plugins
-zinit wait lucid for \
+zinit wait lucid light-mode for \
   atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-  zdharma-continuum/fast-syntax-highlighting \
-  zsh-users/zsh-completions \
-  zsh-users/zsh-autosuggestions \
-  Aloxaf/fzf-tab
+      zdharma-continuum/fast-syntax-highlighting \
+  atload"_zsh_autosuggest_start" \
+      zsh-users/zsh-autosuggestions \
+      zsh-users/zsh-completions \
+      Aloxaf/fzf-tab
 
 zinit snippet OMZP::git 
 zinit snippet OMZP::sudo
@@ -41,9 +40,8 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-autoload -Uz compinit && compinit -C
-
 # Completion styling
+zstyle ':compinit' cache-path ~/.zcompdump
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
@@ -51,7 +49,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls='exa -h --icons --git --color=auto --hyperlink'
+alias ls='eza -h --icons --git --color=auto --hyperlink'
 alias la='ls -la'
 alias ll='ls -l'
 alias tree='tree -C'
@@ -67,9 +65,12 @@ eval "$(zoxide init --cmd cd zsh)"
 
 
 # other stuff
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# fnm
+FNM_PATH="/home/am/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/home/am/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
 
 # bun completions
 [ -s "/home/am/.bun/_bun" ] && source "/home/am/.bun/_bun"
@@ -114,3 +115,12 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# fzf catppuccin
+export FZF_DEFAULT_OPTS=" \
+--style=full \
+--color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
+--color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
+--color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
+--color=selected-bg:#45475A \
+--color=border:#313244,label:#CDD6F4"

@@ -5,22 +5,16 @@ return {
   opts = {
     flavour = "mocha", -- latte, frappe, macchiato, mocha or auto
     transparent_background = false,
-    term_colors = true,
-    dim_inactive = {
-      enabled = true,
-    },
-    custom_highlights = function(colors)
-      -- Fix for snacks.nvim picker until it's fixed
-      return {
-        NormalFloat = { bg = colors.base, fg = colors.text },
-      }
-    end,
+    term_colors = false,
     default_integrations = true,
     integrations = {
       treesitter = true,
       treesitter_context = true,
+      native_lsp = {
+        enabled = true,
+      },
       gitsigns = true,
-      blink_cmp = false,
+      blink_cmp = true,
       neotree = true,
       copilot_vim = true,
       dap_ui = true,

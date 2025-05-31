@@ -12,8 +12,9 @@ return {
     end,
   },
   { -- Detect tabstop and shiftwidth automatically
-    "tpope/vim-sleuth",
+    "NMAC427/guess-indent.nvim",
     event = { "BufReadPost", "BufNewFile" },
+    opts = {},
   },
   { -- Autoformat
     "stevearc/conform.nvim",

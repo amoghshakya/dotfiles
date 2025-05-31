@@ -17,7 +17,7 @@ return {
         easing = "cubic-in-out",
       },
     },
-    image = { enabled = true },
+    image = { enabled = false },
     input = { enabled = true },
     lazygit = {
       enabled = true,

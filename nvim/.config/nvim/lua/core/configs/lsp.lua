@@ -14,10 +14,9 @@ M.servers = {
   astro = {},
   tailwindcss = {},
   emmet_language_server = {},
-  pyright = {},
+  basedpyright = {},
   rust_analyzer = {},
   clangd = {},
-  ts_ls = {},
   jsonls = {},
   intelephense = {
     init_options = {
@@ -34,14 +33,32 @@ M.servers = {
       },
     },
   },
-  texlab = {
-    on_attach = function(client, bufnr)
-      client.server_capabilities.documentFormattingProvider = false
-      client.server_capabilities.documentRangeFormattingProvider = false
-      M.on_attach(client, bufnr)
-    end,
-  },
+  -- texlab = {
+  --   on_attach = function(client, bufnr)
+  --     client.server_capabilities.documentFormattingProvider = false
+  --     client.server_capabilities.documentRangeFormattingProvider = false
+  --     M.on_attach(client, bufnr)
+  --   end,
+  -- },
   ltex_plus = {
+    filetypes = {
+      "bib",
+      "context",
+      "gitcommit",
+      "markdown",
+      "org",
+      "pandoc",
+      "plaintex",
+      "quarto",
+      "mail",
+      "mdx",
+      "rmd",
+      "rnoweb",
+      "rst",
+      "tex",
+      "text",
+      "typst",
+    },
     on_attach = function(client, bufnr)
       M.on_attach(client, bufnr)
       require("ltex_extra").setup({
@@ -53,35 +70,14 @@ M.servers = {
     settings = {
       ltex = {
         language = "en-US",
-        completionEnabled = true,
+        completionEnabled = false,
         enabled = { "latex", "tex", "markdown", "mdx" },
         additionalRules = {
           enablePickyRules = true,
           motherTongue = "en-US",
         },
         latex = {
-          commands = {
-            ["\\caption"] = "ignore",
-            ["\\cite"] = "ignore",
-            ["\\citep"] = "ignore",
-            ["\\citet"] = "ignore",
-            ["\\cref"] = "ignore",
-            ["\\Cref"] = "ignore",
-            ["\\autoref"] = "ignore",
-            ["\\autocite"] = "ignore",
-            ["\\autocites"] = "ignore",
-            ["\\usepackage"] = "ignore",
-            ["\\usepackage*"] = "ignore",
-            ["\\documentclass"] = "ignore",
-            ["\\begin"] = "ignore",
-            ["\\end"] = "ignore",
-            ["\\newcommand"] = "ignore",
-            ["\\renewcommand"] = "ignore",
-            ["\\DeclareMathOperator"] = "ignore",
-            ["\\DeclareMathAlphabet"] = "ignore",
-            ["\\DeclareMathSymbol"] = "ignore",
-            ["\\DeclarePairedDelimiter"] = "ignore",
-          },
+          commands = {},
         },
         diagnosticDelay = "1000ms",
       },

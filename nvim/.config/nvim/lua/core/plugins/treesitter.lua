@@ -30,7 +30,7 @@ return { -- Highlight, edit, and navigate code
       ignore_install = { "latex" },
       highlight = {
         enable = true,
-        disable = {},
+        disable = { "latex" },
         use_languagetree = true,
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to

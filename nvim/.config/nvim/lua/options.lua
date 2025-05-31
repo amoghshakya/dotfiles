@@ -1,4 +1,5 @@
-local o = vim.opt
+local o = vim.o
+local opt = vim.opt
 local g = vim.g
 
 -- [[ Setting options ]]
@@ -59,7 +60,7 @@ o.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 o.list = true
-o.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Preview substitutions live, as you type!
 o.inccommand = "split"
@@ -81,13 +82,13 @@ vim.o.foldenable = true
 -- See `:help 'confirm'`
 o.confirm = true
 
-o.fillchars:append({ eob = " " })
+opt.fillchars:append({ eob = " " })
 
 o.termguicolors = true
 o.cursorlineopt = "both"
 
-o.path:append("**")
-o.isfname:append(":")
+opt.path:append("**")
+opt.isfname:append(":")
 
 -- Neovide settings
 if g.neovide then

@@ -14,13 +14,19 @@ return {
       },
     },
   },
+  { -- `pmizio/typescript-tools.nvim` provides TypeScript and JavaScript LSP support
+    -- with additional features like code actions, formatting, and more
+    "pmizio/typescript-tools.nvim",
+    event = { "VeryLazy" },
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+  },
   {
     "neovim/nvim-lspconfig",
-    event = "VeryLazy",
+    event = { "VeryLazy", "BufReadPre", "BufNewFile" },
     dependencies = {
-      "saghen/blink.cmp",
       {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = {
           path = "skip",
           ui = {
@@ -32,7 +38,7 @@ return {
           },
         },
       },
-      "williamboman/mason-lspconfig.nvim",
+      "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       {
         "j-hui/fidget.nvim",
@@ -99,7 +105,6 @@ return {
         config.on_attach = config.on_attach or lsp_attach
         vim.lsp.config(server, config)
         vim.lsp.enable(server)
-        -- require("lspconfig")[server].setup(config)
       end
 
       vim.diagnostic.config(require("core.configs.lsp").diagnostics)

@@ -28,7 +28,7 @@ return {
       sass = {
         enabled = true,
       },
-      -- mode = "virtualtext", -- For VSCode-like color preview
+      mode = "virtualtext", -- For VSCode-like color preview
       virtualtext = "",
       virtualtext_inline = "before",
     },
