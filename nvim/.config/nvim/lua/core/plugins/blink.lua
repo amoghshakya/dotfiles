@@ -40,7 +40,7 @@ return {
             "rafamadriz/friendly-snippets",
             config = function()
               require("luasnip.loaders.from_vscode").lazy_load()
-              require("luasnip.loaders.from_snipmate").lazy_load()
+              require("luasnip").filetype_extend("blade", { "html" })
             end,
           },
         },
@@ -51,7 +51,7 @@ return {
     opts = {
       snippets = {
         preset = "luasnip",
-        score_offset = 50,
+        -- score_offset = 20,
       },
       keymap = {
         preset = "enter",
@@ -134,8 +134,19 @@ return {
       },
 
       sources = {
-        default = { "lsp", "path", "snippets", "lazydev", "vimtex" },
+        default = { "lsp", "path", "snippets" },
+        per_filetype = {
+          lua = { "lsp", "path", "snippets", "lazydev" },
+          tex = { "lsp", "path", "snippets", "vimtex" },
+          bibtex = { "lsp", "path", "snippets", "vimtex" },
+        },
         providers = {
+          lsp = {
+            score_offset = 200,
+          },
+          snippets = {
+            score_offset = 10,
+          },
           lazydev = {
             module = "lazydev.integrations.blink",
             score_offset = 100,
@@ -143,7 +154,7 @@ return {
           vimtex = {
             name = "vimtex",
             module = "blink.compat.source",
-            score_offset = -3,
+            score_offset = 100,
           },
         },
       },
@@ -155,7 +166,10 @@ return {
         },
       },
 
-      fuzzy = { implementation = "prefer_rust" },
+      fuzzy = {
+        implementation = "prefer_rust",
+        use_frecency = true,
+      },
 
       -- Disable blink for commandline
       -- Fuzzy searching is nice but it's annoying on commandline

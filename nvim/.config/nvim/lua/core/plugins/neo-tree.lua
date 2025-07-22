@@ -57,7 +57,7 @@ return {
       filtered_items = {
         visible = false,
         hide_dotfiles = false,
-        hide_gitignored = true,
+        hide_gitignored = false,
       },
       window = {
         mappings = {
@@ -70,6 +70,9 @@ return {
       follow_current_file = {
         enabled = true,
       },
+    },
+    window = {
+      position = "right",
     },
   },
 }

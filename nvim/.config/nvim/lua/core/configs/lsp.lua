@@ -8,6 +8,12 @@ M.servers = {
       },
     },
   },
+  tinymist = {
+    settings = {
+      exportPdf = "onSave",
+      semanticTokens = "disable",
+    },
+  },
   bashls = {},
   html = {},
   cssls = {},
@@ -19,6 +25,10 @@ M.servers = {
   clangd = {},
   jsonls = {},
   intelephense = {
+    on_attach = function(client, bufnr)
+      client.server_capabilities.documentFormattingProvider = true
+      M.on_attach(client, bufnr)
+    end,
     init_options = {
       storagePath = vim.fn.stdpath("cache") .. "/intelephense",
       globalStoragePath = vim.fn.stdpath("data") .. "/intelephense",
@@ -33,13 +43,6 @@ M.servers = {
       },
     },
   },
-  -- texlab = {
-  --   on_attach = function(client, bufnr)
-  --     client.server_capabilities.documentFormattingProvider = false
-  --     client.server_capabilities.documentRangeFormattingProvider = false
-  --     M.on_attach(client, bufnr)
-  --   end,
-  -- },
   ltex_plus = {
     filetypes = {
       "bib",
@@ -83,9 +86,6 @@ M.servers = {
       },
     },
   },
-  hls = {
-    filetypes = { "haskell" },
-  },
 }
 
 ---@type vim.lsp.client.on_attach_cb
@@ -114,29 +114,6 @@ M.on_attach = function(client, bufnr)
     end, "[T]oggle Inlay [H]ints")
   end
 end
-
-local make_capabilities = vim.lsp.protocol.make_client_capabilities()
-make_capabilities.textDocument.completion.completionItem = {
-  documentationFormat = { "markdown", "plaintext" },
-  deprecatedSupport = true,
-  preselectSupport = true,
-  snippetSupport = true,
-  insertReplaceSupport = true,
-  commitCharactersSupport = true,
-  labelDetailsSupport = true,
-  tagSupport = {
-    valueSet = { 1 },
-  },
-  resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
-    },
-  },
-}
-
-M.capabilities = vim.tbl_deep_extend("force", make_capabilities, require("blink-cmp").get_lsp_capabilities({}, false))
 
 ---@type vim.diagnostic.Opts
 M.diagnostics = {

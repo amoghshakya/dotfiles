@@ -1,11 +1,7 @@
 local M = {}
 
 M.opts = function()
-  local highlights = require("catppuccin.groups.integrations.bufferline")
   return {
-    highlights = highlights.get({
-      styles = { "italic", "bold" },
-    }),
     options = {
       modified_icon = "",
       close_icon = "",

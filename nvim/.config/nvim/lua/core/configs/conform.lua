@@ -23,6 +23,11 @@ local opts = {
     tex = { "latexindent" },
     plaintex = { "latexindent" },
     bib = { "bibtex-tidy" },
+    typst = { "prettypst" },
+    qml = { "qmlformat" },
+    htmldjango = { "djlint" },
+    sql = { "sql_formatter" },
+    blade = { "blade-formatter" },
   },
   formatters = {
     latexindent = {
@@ -33,11 +38,25 @@ local opts = {
         "-g=/dev/null",
       },
     },
+    php_cs_fixer = {
+      env = {
+        PHP_CS_FIXER_IGNORE_ENV = "1",
+      },
+    },
+    qmlformat = {
+      command = "qmlformat",
+      args = { "", "$FILENAME" },
+    },
+    ["blade-formatter"] = {
+      command = "blade-formatter",
+      args = { "--stdin", "--sort-tailwindcss-classes" },
+      stdin = true,
+    },
   },
   format_on_save = {
     -- These options will be passed to conform.format()
     timeout_ms = 1000,
-    lsp_format = false,
+    lsp_format = true,
   },
 }
 

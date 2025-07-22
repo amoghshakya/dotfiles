@@ -17,7 +17,15 @@ return {
   { -- `pmizio/typescript-tools.nvim` provides TypeScript and JavaScript LSP support
     -- with additional features like code actions, formatting, and more
     "pmizio/typescript-tools.nvim",
-    event = { "VeryLazy" },
+    ft = {
+      "typescript",
+      "typescriptreact",
+      "typescript.tsx",
+      "javascript",
+      "javascriptreact",
+      "javascript.jsx",
+      "astro",
+    },
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
   },
@@ -54,7 +62,7 @@ return {
     },
     config = function()
       local lsp_attach = require("core.configs.lsp").on_attach
-      local capabilities = require("core.configs.lsp").capabilities
+      -- local capabilities = require("core.configs.lsp").capabilities
 
       local mason_registry = require("mason-registry")
 
@@ -66,6 +74,9 @@ return {
       local mlsp = require("mason-lspconfig")
       local lspconfig_to_package = mlsp.get_mappings().lspconfig_to_package
 
+      -- Install LSP servers if not already installed
+      -- This is a workaround to ensure that servers that are already installed
+      -- are not reinstalled by mason
       for server, _ in pairs(servers) do
         local mason_name = lspconfig_to_package[server]
         if mason_name then
@@ -90,7 +101,7 @@ return {
       end
 
       vim.list_extend(ensure_installed, {
-        "stylua",
+        "stylua", -- for lua formatting
       })
 
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed, auto_update = true })
@@ -98,10 +109,11 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {},
         automatic_installation = false,
+        automatic_enable = true,
       })
 
       for server, config in pairs(servers) do
-        config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, config.capabilities or {})
+        -- config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, config.capabilities or {})
         config.on_attach = config.on_attach or lsp_attach
         vim.lsp.config(server, config)
         vim.lsp.enable(server)
