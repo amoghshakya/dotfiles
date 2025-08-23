@@ -56,6 +56,8 @@ alias tree='tree -C'
 alias hyprland='Hyprland'
 alias nvfzf='nvim $(fzf -m --preview="bat --color=always {}")'
 alias lg='lazygit'
+alias grep='grep --color'
+alias z='cd'
 
 # Variables
 export EDITOR="nvim"
@@ -115,12 +117,3 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-# fzf catppuccin
-export FZF_DEFAULT_OPTS=" \
---style=full \
---color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
---color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
---color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
---color=selected-bg:#45475A \
---color=border:#313244,label:#CDD6F4"

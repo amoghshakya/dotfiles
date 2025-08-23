@@ -1,14 +1,13 @@
-# Dotfiles 
+# Dotfiles
 
-This repository contains the config files for the stuff I use (or have used). 
+This repository contains the config files for the stuff I use (or have used).
 
 ## Usage
 
 Clone the repository and use `stow` to symlink the files to the location.
 
 > Except for `nixos`, which I have yet to figure out how to configure,
-> everything else can be *stowed*.
-
+> everything else can be _stowed_.
 
 ```bash
 stow <directory>
