@@ -20,12 +20,12 @@ zinit wait lucid light-mode for \
       zdharma-continuum/fast-syntax-highlighting \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \
-      zsh-users/zsh-completions \
       Aloxaf/fzf-tab
 
-zinit snippet OMZP::git 
+zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::fnm
 
 # History
 HISTSIZE=10000
@@ -52,7 +52,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias ls='eza -h --icons --git --color=auto --hyperlink'
 alias la='ls -la'
 alias ll='ls -l'
-alias tree='tree -C'
+alias tree='tree --dirsfirst -C'
 alias hyprland='Hyprland'
 alias nvfzf='nvim $(fzf -m --preview="bat --color=always {}")'
 alias lg='lazygit'
@@ -67,20 +67,30 @@ eval "$(zoxide init --cmd cd zsh)"
 
 
 # other stuff
+
+# Perl scripts like biber
+export PATH="/usr/bin/vendor_perl:$PATH"
+
 # fnm
 FNM_PATH="/home/am/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
-  export PATH="/home/am/.local/share/fnm:$PATH"
+  export PATH="$FNM_PATH:$PATH"
   eval "`fnm env`"
 fi
 
-# bun completions
-[ -s "/home/am/.bun/_bun" ] && source "/home/am/.bun/_bun"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba shell init' !!
+export MAMBA_EXE='/home/am/miniforge3/bin/mamba';
+export MAMBA_ROOT_PREFIX='/home/am/miniforge3';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -97,24 +107,3 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-. "/home/am/.deno/env"
-
-
-export PATH="/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$PATH"
-
-PATH="/home/am/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/am/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/am/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/am/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/am/perl5"; export PERL_MM_OPT;
-
-[ -f "/home/am/.ghcup/env" ] && . "/home/am/.ghcup/env" # ghcup-env
-
-# pnpm
-export PNPM_HOME="/home/am/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-export PATH=$PATH:$HOME/go/bin

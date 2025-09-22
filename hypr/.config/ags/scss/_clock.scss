@@ -1,0 +1,15 @@
+@use "variables" as *;
+@use "mixins";
+
+window.Bar {
+  .Clock {
+    @include mixins.rounded-dims;
+    padding: 0 6px;
+    transition: $transition;
+    // border-radius: 4px;
+
+    &:hover {
+      background-color: $bg-surface;
+    }
+  }
+}

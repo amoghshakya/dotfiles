@@ -1,0 +1,190 @@
+@use "variables" as *;
+@use "mixins";
+
+window.Bar {
+  .SysTray {
+    padding: 0 6px;
+
+    .Tray {
+      @include mixins.rounded-dims;
+      padding: 0 6px;
+    }
+
+    .systemItems {
+      @include mixins.rounded-dims;
+      padding: 0 6px;
+      transition: $transition;
+      // border-radius: 4px;
+
+      &:hover {
+        background-color: $bg-surface;
+      }
+
+      .controlCenter {
+        .section {
+          background-color: $bg-color;
+          padding: 6px;
+          border-radius: 6px;
+        }
+
+        .toggleList {
+          border-radius: 50px;
+          padding: 0 6px;
+
+          image {
+            -gtk-icon-size: 12px;
+            transition: $transition;
+            transform: rotate(0deg);
+          }
+
+          &.expanded image {
+            transform: rotate(90deg);
+          }
+
+          &:hover {
+            background-color: $bg-surface;
+          }
+        }
+
+        .audioControls {
+          .toggleMute {
+            padding: 0 6px;
+            background-color: $bg-surface;
+
+            &.muted {
+              background-color: $bg-color;
+            }
+
+            &:hover {
+              background-color: $bg-surface-hover;
+            }
+          }
+        }
+        .deviceList {
+          background-color: $bg-color;
+          padding: 4px;
+          border-radius: 6px;
+
+          .route {
+            padding: 6px;
+            border-radius: 4px;
+
+            &:hover {
+              background-color: $bg-secondary;
+            }
+
+            &.active {
+              background-color: $bg-surface;
+            }
+          }
+        }
+        .brightnessControl {
+          image {
+            padding: 6px;
+            margin: 2px;
+          }
+        }
+        .wifiControls {
+          .toggleWifi {
+            padding: 0 6px;
+            background-color: $bg-surface;
+
+            &.disabled {
+              background-color: $bg-color;
+            }
+
+            &:hover {
+              background-color: $bg-surface-hover;
+            }
+          }
+
+          .ssid {
+            color: $text-muted;
+          }
+
+          .wifiList {
+            background-color: $bg-color;
+            padding: 4px;
+            border-radius: 6px;
+
+            .accessPoint {
+              padding: 6px;
+              border-radius: 4px;
+
+              &:hover {
+                background-color: $bg-secondary;
+              }
+            }
+          }
+        }
+
+        .powerProfilesControl {
+          .profileIcon {
+            padding: 0 6px;
+          }
+
+          label.powerProfile {
+            color: $text-muted;
+          }
+
+          .profilesList {
+            background-color: $bg-color;
+            padding: 4px;
+            border-radius: 6px;
+
+            .profileItem {
+              padding: 6px;
+              border-radius: 4px;
+
+              &:hover {
+                background-color: $bg-secondary;
+              }
+
+              &.active {
+                background-color: $bg-surface;
+              }
+            }
+          }
+        }
+
+        .powerButtons {
+          .toggleButton {
+            padding: 6px;
+            border: 1px solid $border-color;
+            transition: $transition;
+            border-radius: 50%;
+
+            &:hover {
+              background-color: $bg-secondary;
+            }
+          }
+
+          .powerOff,
+          .restart,
+          .logout {
+            padding: 6px;
+            border: 1px solid $border-color;
+            transition: $transition;
+            border-radius: 50%;
+
+            &:hover {
+              background-color: $bg-secondary;
+            }
+          }
+
+          .powerOff:hover {
+            background: $accent-danger;
+          }
+
+          .restart:hover {
+            background: $accent-warning;
+          }
+
+          .logout:hover {
+            background: $accent-info;
+          }
+        }
+      }
+    }
+  }
+}

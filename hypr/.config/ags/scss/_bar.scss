@@ -1,0 +1,70 @@
+@use "variables" as *;
+@use "mixins";
+
+window.Bar {
+  padding: 2px;
+  color: $text-color;
+  font-weight: bold;
+  font-size: 12px;
+
+  button {
+    background: transparent;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    margin: 2px;
+    padding: 0;
+    color: inherit;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  > centerbox {
+    background: $bg-color;
+    border-radius: 10px;
+    margin: 8px;
+  }
+
+  .ActiveApp {
+    @include mixins.rounded-dims;
+    padding: 0 8px;
+  }
+
+  // not recommended to override globally but whatever
+  popover {
+    arrow {
+      all: unset;
+    }
+
+    contents {
+      // popover body
+      margin: -8px 0;
+      background-color: $bg-panel;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+  }
+
+  scale {
+    trough {
+      border-radius: 2px;
+      slider {
+        // margin and min dimensions have a weird ass ratio otherwise gjs throws a warning
+        // -8 : 20
+        margin: -5px;
+        min-height: 12px;
+        min-width: 12px;
+        background-color: $accent-primary;
+      }
+      fill {
+        // this is the unfilled part of the slider
+        background-color: $bg-secondary;
+      }
+      highlight {
+        // this is the filled part of the slider
+        background-color: $accent-info;
+        padding: 2px; // this changes the slider track height
+      }
+    }
+  }
+}

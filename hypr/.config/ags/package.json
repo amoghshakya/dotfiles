@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "ags": "*",
+    "gnim": "*"
+  },
+  "prettier": {
+    "semi": true,
+    "tabWidth": 2
+  }
+}

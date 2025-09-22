@@ -1,0 +1,31 @@
+@use "variables" as *;
+@use "mixins";
+
+window.Bar {
+  .Workspaces {
+    @include mixins.rounded-dims;
+    padding: 8px;
+
+    .workspace {
+      $dims: 1px;
+      transition: $transition;
+      padding: 2px;
+      min-width: $dims;
+      min-height: $dims;
+      border-radius: 50%;
+      background-color: $bg-surface;
+
+      &:hover {
+        background-color: $bg-surface-hover;
+        padding-right: 15px;
+        border-radius: 25px;
+      }
+
+      &.focused {
+        background-color: $accent-primary;
+        padding-right: 18px;
+        border-radius: 25px;
+      }
+    }
+  }
+}

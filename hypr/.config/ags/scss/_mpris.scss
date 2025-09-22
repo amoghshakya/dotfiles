@@ -1,0 +1,84 @@
+@use "variables" as *;
+@use "mixins";
+
+window.Bar {
+  .Mpris {
+    @include mixins.rounded-dims;
+    padding: 0 6px;
+    transition: $transition;
+    // border-radius: 4px;
+
+    // .mediaPopover {
+    //   arrow {
+    //     all: unset;
+    //   }
+    //   contents {
+    //     // popover body
+    //     margin: -8px 0;
+    //     background-color: $mantle;
+    //   }
+    // }
+
+    &:hover {
+      background-color: $bg-surface;
+
+      .indicator {
+        &.paused {
+          image {
+            filter: none;
+          }
+        }
+      }
+    }
+    .indicator {
+      &.paused {
+        image {
+          filter: grayscale(100%);
+        }
+      }
+    }
+    .playersContainer {
+      min-width: 350px;
+      padding-bottom: 0;
+
+      .playerEntry {
+        padding: 6px;
+        background-color: $bg-color;
+        border-radius: 6px;
+        box-shadow: $box-shadow;
+
+        .coverArt {
+          border: none;
+          border-radius: 4px;
+        }
+        .playerControls {
+          padding: 6px 4px;
+          .trackInfo {
+            .trackTitle {
+              font-weight: 600;
+              font-size: 14px;
+            }
+            .trackArtist {
+              color: $text-muted;
+              font-size: 12px;
+              font-weight: 400;
+            }
+          }
+          .playbackControls {
+            padding: 4px;
+            button {
+              padding: 3px 6px;
+              &:hover {
+                background-color: $bg-surface;
+              }
+            }
+          }
+        }
+        .mediaTime {
+          font-size: 10px;
+          min-width: 40px;
+        }
+      }
+    }
+  }
+}

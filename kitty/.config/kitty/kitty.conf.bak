@@ -1,5 +1,5 @@
 font_size                   10.0
-modify_font cell_height     -1px
+modify_font cell_height     100%
 modify_font cell_width      100%
 
 disable_ligatures           cursor
@@ -20,7 +20,7 @@ hide_window_decorations     yes
 confirm_os_window_close     0
 
 # Tabs
-tab_bar_min_tabs            1
+tab_bar_min_tabs            2
 tab_bar_style               powerline
 tab_powerline_style         slanted
 tab_bar_edge                top
@@ -60,7 +60,7 @@ include current-theme.conf
 
 
 # BEGIN_KITTY_FONTS
-font_family      family="CommitMono Nerd Font"
+font_family      family='CommitMono Nerd Font' postscript_name=CommitMonoNF-Regular
 bold_font        auto
 italic_font      auto
 bold_italic_font auto

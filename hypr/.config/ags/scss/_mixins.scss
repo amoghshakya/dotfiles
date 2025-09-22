@@ -1,0 +1,9 @@
+@use "variables" as *;
+
+@use "sass:color";
+
+@mixin rounded-dims {
+  background: color.adjust($bg-color, $alpha: -0.5);
+  border: 1px solid $bg-surface-hover;
+  border-radius: 50px;
+}

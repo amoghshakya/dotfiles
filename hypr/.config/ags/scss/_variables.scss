@@ -1,0 +1,36 @@
+@use "theme" as cat;
+@use "sass:color";
+
+// Backgrounds
+$bg-color: cat.$base; // main background
+$bg-secondary: cat.$surface1; // whatever
+$bg-surface: cat.$surface0; // cards, panels
+$bg-surface-hover: cat.$surface2;
+$bg-panel: cat.$mantle; // popovers, dropdowns
+
+// Text
+$text-color: cat.$text; // primary text
+$text-muted: cat.$subtext0; // secondary text
+$text-inverted: cat.$base; // text on colored backgrounds
+
+// Accents
+$accent-primary: cat.$lavender; // focused workspace, highlight
+$accent-secondary: cat.$rosewater;
+$accent-info: cat.$blue;
+$accent-warning: cat.$yellow;
+$accent-danger: cat.$red;
+$accent-success: cat.$green;
+
+// Buttons
+$button-bg: cat.$surface1;
+$button-hover-bg: cat.$surface2;
+
+// Borders & Shadows
+$border-color: cat.$surface2;
+$shadow-color: rgba(0, 0, 0, 0.1);
+
+// Transitions
+$transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+$box-shadow:
+  0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0 2px 4px -1px rgba(0, 0, 0, 0.06);
