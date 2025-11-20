@@ -1,6 +1,20 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+format = """
+$os\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$all\
+$fill\
+$time\
+$line_break\
+$character
+"""
+
 palette = "catppuccin_mocha"
 
 # Inserts a blank line between shell prompts
@@ -8,8 +22,38 @@ add_newline = true
 
 # Replace the '❯' symbol in the prompt with '➜'
 [character] # The name of the module we are configuring is 'character'
-success_symbol = '[❯](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+success_symbol = '[❯](bold fg:peach)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
 error_symbol = "[✖](bold red)"
+
+[os]
+disabled = true
+
+[username]
+show_always = false
+format = '[$user]($style)'
+
+[hostname]
+disabled = true
+trim_at = "."
+ssh_only = false
+ssh_symbol = " "
+
+[directory]
+style = "fg:lavender bold"
+read_only = " 󰌾"
+
+[git_branch]
+symbol = " "
+style = "bold yellow"
+
+[time]
+disabled = false 
+style = "fg:blue"
+time_format = "%I:%M"
+format = "[$time]($style) "
+
+[fill]
+symbol = " "
 
 # Disable the package module, hiding it from the prompt completely
 [package]
@@ -17,8 +61,7 @@ disabled = true
 symbol = "󰏗 "
 
 [cmd_duration]
-min_time = 4
-show_milliseconds = false
+show_milliseconds = true
 disabled = false
 style = "bold italic red"
 
@@ -34,7 +77,8 @@ symbol = " "
 
 [conda]
 ignore_base = false
-format = "[( $symbol$environment) ](green)"
+format = "[$symbol$environment]($style) "
+style = "fg:green"
 symbol = " "
 
 [crystal]
@@ -42,9 +86,6 @@ symbol = " "
 
 [dart]
 symbol = " "
-
-[directory]
-read_only = " 󰌾"
 
 [docker_context]
 symbol = " "
@@ -61,10 +102,6 @@ symbol = " "
 [fossil_branch]
 symbol = " "
 
-[git_branch]
-symbol = " "
-style = "bold yellow"
-
 [golang]
 symbol = " "
 
@@ -79,9 +116,6 @@ symbol = " "
 
 [hg_branch]
 symbol = " "
-
-[hostname]
-ssh_symbol = " "
 
 [java]
 symbol = " "
@@ -121,6 +155,7 @@ Amazon = " "
 Android = " "
 Arch = " "
 Artix = " "
+CachyOS = " "
 CentOS = " "
 Debian = " "
 DragonFly = " "
@@ -217,4 +252,3 @@ surface0 = "#313244"
 base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
-

@@ -58,6 +58,7 @@ alias nvfzf='nvim $(fzf -m --preview="bat --color=always {}")'
 alias lg='lazygit'
 alias grep='grep --color'
 alias z='cd'
+alias :q='exit'
 
 # Variables
 export EDITOR="nvim"
@@ -107,3 +108,11 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+# pnpm
+export PNPM_HOME="/home/am/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
