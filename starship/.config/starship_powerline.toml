@@ -2,36 +2,37 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
+[ ](bg:mauve)\
 $os\
 $username\
-[ ](bg:none)\
 $directory\
+[](fg:mauve bg:surface0)\
 $git_branch\
-$git_state\
 $git_status\
-$line_break\
+$git_state\
+[](fg:surface0)\
 $character
 """
-
-right_format = """
-$all\
-$cmd_duration\
-$time"""
 
 palette = "catppuccin_mocha"
 
 # Inserts a blank line between shell prompts
 add_newline = true
 
-[character]
-success_symbol = '[❯](bold fg:peach)'
+# Replace the '❯' symbol in the prompt with '➜'
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[❯](bold fg:peach)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
 error_symbol = "[](bold red)"
 
 [os]
-disabled = true
+disabled = false             # Set to false to see the pill start
+style = "bg:mauve fg:base"
+format = "[$symbol]($style)"
 
 [username]
 show_always = true
+style_user = "bg:mauve fg:base bold"
+style_root = "bg:red fg:base bold"
 format = '[$user]($style)'
 
 [hostname]
@@ -41,18 +42,25 @@ ssh_only = false
 ssh_symbol = " "
 
 [directory]
-style = "fg:lavender bold"
+style = "bg:mauve fg:base bold"
+format = "[ $path ]($style)"
+truncation_length = 3
 read_only = " 󰌾"
 
 [git_branch]
 symbol = " "
-style = "bold yellow"
+style = "bg:surface0 fg:yellow"
+format = "[[ $symbol$branch ]($style)]($style)"
+
+[git_status]
+style = "bg:surface0 fg:yellow"
+format = "[[($all_status$ahead_behind )]($style)]($style)"
 
 [time]
 disabled = false
-style = "fg:blue"
+style = "fg:subtext0"         # Muted so it doesn't distract
 time_format = "%I:%M %p"
-format = "[$time]($style) "
+format = " [ $time ]($style)"
 
 [fill]
 symbol = " "
@@ -63,9 +71,9 @@ disabled = true
 symbol = "󰏗 "
 
 [cmd_duration]
-show_milliseconds = true
-disabled = false
-style = "bold italic red"
+min_time = 500
+style = "fg:maroon italic"
+format = "took [$duration]($style) "
 
 # Preset
 [aws]

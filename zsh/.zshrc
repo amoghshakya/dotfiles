@@ -49,8 +49,8 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls='eza -h --icons --git --color=auto --hyperlink'
-alias la='ls -la'
+alias ls='eza --icons --git --color=auto --hyperlink'
+alias la='ls -lA'
 alias ll='ls -l'
 alias tree='tree --dirsfirst -C'
 alias hyprland='Hyprland'
@@ -93,22 +93,6 @@ fi
 unset __mamba_setup
 # <<< mamba initialize <<<
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/am/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/am/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/home/am/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/am/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-
 # pnpm
 export PNPM_HOME="/home/am/.local/share/pnpm"
 case ":$PATH:" in
@@ -116,3 +100,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Go install path
+export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
