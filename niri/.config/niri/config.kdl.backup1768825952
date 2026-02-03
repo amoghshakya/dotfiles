@@ -183,5 +183,3 @@ workspace "spotify"
 include "modules/windowrules.kdl"
 include "modules/layerrules.kdl"
 include "modules/keybinds.kdl"
-
-include "dms/cursor.kdl"
