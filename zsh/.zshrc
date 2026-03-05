@@ -59,6 +59,13 @@ alias lg='lazygit'
 alias grep='grep --color'
 alias z='cd'
 alias :q='exit'
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # alias open="open"
+else
+  open() {
+    xdg-open "$@" > /dev/null 2>&1 &
+  }
+fi
 
 # Variables
 export EDITOR="nvim"
@@ -103,3 +110,6 @@ esac
 
 # Go install path
 export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+
+export PATH=$PATH:/home/am/.spicetify
+export LIBVIRT_DEFAULT_URI="qemu:///system"

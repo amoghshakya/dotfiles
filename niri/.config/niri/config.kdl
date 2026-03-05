@@ -184,4 +184,6 @@ include "modules/windowrules.kdl"
 include "modules/layerrules.kdl"
 include "modules/keybinds.kdl"
 
+include "dms/layout.kdl"
+include "dms/colors.kdl"
 include "dms/cursor.kdl"
