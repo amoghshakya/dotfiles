@@ -1,0 +1,45 @@
+font-family = Iosevka
+font-feature = "ss14" # jetbrains variant
+font-size = 12
+
+# line height
+adjust-cell-height = 20%
+
+adjust-underline-position = 4
+adjust-underline-thickness = 1
+
+bold-color = bright
+
+# keybinds
+keybind = ctrl+arrow_right=goto_split:right
+keybind = ctrl+arrow_down=goto_split:down
+keybind = ctrl+arrow_left=goto_split:left
+keybind = ctrl+arrow_up=goto_split:up
+keybind = alt+shift+arrow_right=resize_split:right,10
+keybind = alt+shift+arrow_down=resize_split:down,10
+keybind = alt+shift+arrow_left=resize_split:left,10
+keybind = alt+shift+arrow_up=resize_split:up,10
+
+# Window Options
+# window-padding-x = 4
+# window-padding-y = 4
+
+cursor-text = cell-background
+
+# clipboard
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+
+working-directory = home
+
+# GTK
+# gtk-titlebar = false
+gtk-titlebar-hide-when-maximized = true
+
+# shaders
+custom-shader = shaders/cursor_smear.glsl
+
+theme = Ayu
+# theme = Gruvbox Dark Hard
+# theme = Catppuccin Mocha
+# theme = Rose Pine

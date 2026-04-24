@@ -12,7 +12,8 @@ config.initial_rows = 28
 
 -- or, changing the font size and color scheme.
 config.font_size = 10
-config.font = wezterm.font("CommitMono Nerd Font")
+config.font = wezterm.font("Iosevka Nerd Font")
+config.line_height = 1.1
 -- config.color_scheme = "Catppuccin Mocha"
 
 -- Window padding

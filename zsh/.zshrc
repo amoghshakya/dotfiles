@@ -3,8 +3,8 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 # Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+    mkdir -p "$(dirname $ZINIT_HOME)"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 # Source/Load zinit
@@ -17,15 +17,16 @@ eval "$(starship init zsh)"
 # Add in zsh plugins
 zinit wait lucid light-mode for \
   atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-      zdharma-continuum/fast-syntax-highlighting \
-  atload"_zsh_autosuggest_start" \
-      zsh-users/zsh-autosuggestions \
-      Aloxaf/fzf-tab
+    zdharma-continuum/fast-syntax-highlighting \
+    Aloxaf/fzf-tab
+
+zinit ice wait lucid atload"_zsh_autosuggest_start"
+zinit light zsh-users/zsh-autosuggestions
+
 
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
-zinit snippet OMZP::fnm
 
 # History
 HISTSIZE=10000
@@ -55,20 +56,22 @@ alias ll='ls -l'
 alias tree='tree --dirsfirst -C'
 alias hyprland='Hyprland'
 alias nvfzf='nvim $(fzf -m --preview="bat --color=always {}")'
+alias vim='nvim' # sometimes i typo vim instead of nvim
 alias lg='lazygit'
 alias grep='grep --color'
 alias z='cd'
 alias :q='exit'
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  # alias open="open"
+    # alias open="open"
 else
-  open() {
-    xdg-open "$@" > /dev/null 2>&1 &
-  }
+    open() {
+        xdg-open "$@" > /dev/null 2>&1 &
+    }
 fi
 
 # Variables
 export EDITOR="nvim"
+export VISUAL="nvim"
 
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
@@ -82,8 +85,9 @@ export PATH="/usr/bin/vendor_perl:$PATH"
 # fnm
 FNM_PATH="/home/am/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
-  export PATH="$FNM_PATH:$PATH"
-  eval "`fnm env`"
+    export PATH="$FNM_PATH:$PATH"
+    eval "`fnm env`"
+    zinit snippet OMZP::fnm
 fi
 
 
@@ -103,8 +107,8 @@ unset __mamba_setup
 # pnpm
 export PNPM_HOME="/home/am/.local/share/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
 
