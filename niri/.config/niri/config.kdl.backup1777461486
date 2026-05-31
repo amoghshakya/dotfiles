@@ -8,7 +8,7 @@
 // https://yalter.github.io/niri/Configuration:-Input
 
 // runner
-// spawn-sh-at-startup "vicinae server"
+spawn-sh-at-startup "vicinae server"
 
 // no client side decorations
 prefer-no-csd
@@ -157,7 +157,10 @@ hotkey-overlay {
 }
 
 // cursor
-include "dms/cursor.kdl"
+cursor {
+    xcursor-theme "capitaine-cursors"
+    hide-when-typing
+}
 
 // The path is formatted with strftime(3) to give you the screenshot date and time.
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
@@ -184,5 +187,3 @@ include "modules/keybinds.kdl"
 include "dms/layout.kdl"
 include "dms/colors.kdl"
 include "dms/cursor.kdl"
-
-include "dms/outputs.kdl"

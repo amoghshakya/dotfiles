@@ -78,6 +78,7 @@ eval "$(zoxide init --cmd cd zsh)"
 
 
 # other stuff
+export PATH="/home/am/.local/bin:$PATH"
 
 # Perl scripts like biber
 export PATH="/usr/bin/vendor_perl:$PATH"
@@ -116,4 +117,6 @@ esac
 export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
 export PATH=$PATH:/home/am/.spicetify
-export LIBVIRT_DEFAULT_URI="qemu:///system"
+
+# opencode
+export PATH=/home/am/.opencode/bin:$PATH
