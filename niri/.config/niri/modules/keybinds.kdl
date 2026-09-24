@@ -2,10 +2,9 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    Mod+Space repeat=false hotkey-overlay-title="Run an Application: fuzzel" { spawn-sh "pkill fuzzel || fuzzel"; }
+    Mod+Space repeat=false hotkey-overlay-title="Run an Application: fuzzel" { spawn "vicinae" "toggle"; }
     Mod+E repeat=false hotkey-overlay-title="Open Files Manager: Files" { spawn "nautilus"; }
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
-    Mod+Alt+L hotkey-overlay-title="Lock Screen" { spawn "dms" "ipc" "call" "lock" "lock"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
@@ -246,5 +245,5 @@ binds {
     // Mirror the focused output
     Mod+P repeat=false { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
 
-    Mod+V hotkey-overlay-title="Clipboard Manager" { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+    Mod+V repeat=false hotkey-overlay-title="Clipboard Manager" { spawn "vicinae" "vicinae://launch/clipboard/history"; }
 }

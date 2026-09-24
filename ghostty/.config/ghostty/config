@@ -1,6 +1,7 @@
 font-family = Iosevka
-font-feature = "+ss14" # jetbrains variant
-font-size = 11
+font-feature = ss14 
+font-size = 10
+font-thicken = true
 
 # line height
 adjust-cell-height = 20%

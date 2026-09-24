@@ -50,7 +50,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls='eza --icons --git --color=auto --hyperlink'
+alias ls='eza --icons --git --color=auto --hyperlink=auto'
 alias la='ls -lA'
 alias ll='ls -l'
 alias tree='tree --dirsfirst -C'
@@ -118,5 +118,15 @@ export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
 export PATH=$PATH:/home/am/.spicetify
 
+
+# kimi-code
+export PATH="/home/am/.kimi-code/bin:$PATH"
+
+# Pi
+export PATH="/home/am/.local/share/fnm/node-versions/v24.15.0/installation/bin:$PATH"
+
+# kilo
+export PATH="/home/am/.kilo/bin:$PATH"
+
 # opencode
-export PATH=/home/am/.opencode/bin:$PATH
+export PATH="/home/am/.opencode/bin:$PATH"

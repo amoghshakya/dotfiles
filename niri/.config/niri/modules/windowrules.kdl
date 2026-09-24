@@ -27,10 +27,10 @@ window-rule {
     open-floating true
 }
 
-// Start Spotify maximized on the 3rd workspace
+// Start Spotify floating on the 3rd workspace
 window-rule {
     match app-id=r#"spotify$"#
-    open-maximized true
+    open-floating true
     open-on-workspace "spotify"
 }
 
@@ -59,3 +59,10 @@ window-rule {
     clip-to-geometry true
 }
 
+// Floating Noctalia settings window.
+window-rule {
+  match app-id="dev.noctalia.Noctalia"
+  open-floating true
+  default-column-width { fixed 1080; }
+  default-window-height { fixed 920; }
+}
